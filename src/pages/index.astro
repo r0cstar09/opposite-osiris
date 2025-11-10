@@ -27,22 +27,22 @@ const projects = (await getCollection('work'))
 		<div class="wrapper stack gap-8 lg:gap-20">
 			<header class="hero">
 				<Hero
-					title="Hello, my name is Jeanine White"
-					tagline="I am a Creative Developer who is currently based in Portland, Oregon."
+					title="Hello, my name is Tony Muzo"
+					tagline="I build security automation, threat intelligence reports, and cloud defense tooling."
 					align="start"
 				>
 					<div class="roles">
-						<Pill><Icon icon="code" size="1.33em" /> Developer</Pill>
-						<Pill><Icon icon="microphone-stage" size="1.33em" /> Speaker</Pill>
-						<Pill><Icon icon="pencil-line" size="1.33em" /> Writer</Pill>
+						<Pill><Icon icon="shield" size="1.33em" /> Security Engineer</Pill>
+						<Pill><Icon icon="code" size="1.33em" /> Automation Builder</Pill>
+						<Pill><Icon icon="book-open" size="1.33em" /> Threat Intel Writer</Pill>
 					</div>
 				</Hero>
 
 				<img
-					alt="Jeanine White smiling in a red plaid shirt and tortoise shell glasses"
+					alt="Tony posing for a picture"
 					width="480"
 					height="620"
-					src="/assets/portrait.jpg"
+					src="/assets/tonyportrait.jpeg"
 				/>
 			</header>
 
@@ -53,7 +53,7 @@ const projects = (await getCollection('work'))
 			<section class="section with-background with-cta">
 				<header class="section-header stack gap-2 lg:gap-4">
 					<h3>Selected Work</h3>
-					<p>Take a look below at some of my featured work for clients from the past few years.</p>
+					<p>A few of my security engineering, automation, and threat intelligence projects.</p>
 				</header>
 
 				<div class="gallery">
@@ -88,7 +88,7 @@ const projects = (await getCollection('work'))
 				<div class="gallery">
 					<Grid variant="small">
 						{
-							['Medium', 'BuzzFeed', 'The Next Web', 'awwwards.', 'TechCrunch'].map((brand) => (
+							['GitHub', 'SANS Institute', 'Wazuh', 'Cisco Secure', 'OffSec'].map((brand) => (
 								<li class="mention-card">
 									<p>{brand}</p>
 								</li>

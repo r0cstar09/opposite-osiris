@@ -5,8 +5,11 @@ import Icon from './Icon.astro';
 
 <aside>
 	<h2>Interested in working together?</h2>
-	<CallToAction href="mailto:me@example.com">
-		Send Me a Message
+	<p class="subtitle">
+    Available for security engineering, threat intelligence reporting, and automation tooling projects.
+  </p>
+	<CallToAction href="mailto:tony@tonymuzo.dev">
+		Contact Tony
 		<Icon icon="paper-plane-tilt" size="1.2em" />
 	</CallToAction>
 </aside>
@@ -30,6 +33,13 @@ import Icon from './Icon.astro';
 		max-width: 15ch;
 	}
 
+	.subtitle {
+    font-size: var(--text-md);
+    text-align: center;
+    max-width: 40ch;
+    opacity: 0.85;
+  }
+
 	@media (min-width: 50em) {
 		aside {
 			padding: 7.5rem;
@@ -42,5 +52,9 @@ import Icon from './Icon.astro';
 			font-size: var(--text-3xl);
 			text-align: left;
 		}
+
+		.subtitle {
+      text-align: left;
+    }
 	}
 </style>
