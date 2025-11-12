@@ -1,6 +1,6 @@
 title: "Resume – Tony Muzo"
-img: "/assets/portrait.jpg"
-img_alt: "Portrait of cybersecurity professional Tony Muzo"
+img: "/assets/resume.png"
+img_alt: "Tony Muzo resume preview"
 description: "Professional resume of Tony Muzo — Cybersecurity analyst, team lead, and threat intelligence specialist."
 publishDate: "2025-11-12"
 tags:
