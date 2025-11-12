@@ -1,3 +1,4 @@
+---
 title: "Resume – Tony Muzo"
 img: "/assets/resume.png"
 img_alt: "Tony Muzo resume preview"
