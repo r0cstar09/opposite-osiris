@@ -1,7 +1,8 @@
 ---
-title: "Security Theatre vs Real Defence"
-date: "2025-02-01"
-draft: false
+title: "Industry Collapse"
+description: "Why the West produces dashboards instead of defenders."
+publishDate: "2025-02-01"
+tags: ["cyber", "doctrine", "collapse"]
 ---
 
-Your article body here...
+Mark down here
