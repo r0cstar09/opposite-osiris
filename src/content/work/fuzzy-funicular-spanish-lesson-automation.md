@@ -1,133 +1,106 @@
 ---
 title: "fuzzy-funicular — Spanish Lesson Delivery Automation"
 publishDate: 2026-05-23
-img: /assets/fuzzy-funicular/fuzzy-funicular-hero.png
-img_alt: "GitHub Actions workflow scheduling daily Spanish lesson email delivery"
+img: /assets/fuzzy-funicular/fuzzy-funicular-email-lesson-40-top.png
+img_alt: "Rendered Spanish daily lesson email with pattern framing and writing drills"
 description: |
-  A Python and GitHub Actions pipeline that validates structured lesson JSON, selects lessons by
-  date and cadence, renders Markdown/HTML email drills, and delivers daily Spanish writing practice
-  through scheduled SMTP automation.
+  Automated daily Spanish writing drills delivered by email — structured exercises that build
+  sentence patterns, tense choice, and productive output through cognitive framing, controlled
+  practice, contrast sets, and answer keys.
 tags:
   - Python
   - GitHub Actions
+  - Spanish Learning
+  - Writing Drills
   - Workflow Automation
-  - Content Modeling
-  - Education Systems
 ---
 
 ## Introduction
 
-**fuzzy-funicular** is a lesson-delivery automation system I built to turn structured Spanish drill content into reliable, scheduled email practice. The problem was operational, not pedagogical: manual sends were easy to skip, hard to pace consistently, and risky to ship without validation. The solution is a small Python pipeline plus GitHub Actions that enforces schema checks, date-based lesson selection, and repeatable Markdown/HTML rendering before anything reaches a mailbox.
+**fuzzy-funicular** sends structured Spanish **writing practice** to your inbox on a steady schedule. Each lesson targets one grammar pattern (ser + cognates, pronominal verbs, preterite vs imperfect, and dozens more) and walks you through the same drill sequence every time — so you are not guessing what to study, and you are not only reading rules without producing Spanish.
+
+The engineering side is simple: lessons live as JSON, a Python script renders them into email-friendly HTML, and GitHub Actions delivers them on a cron you control. The learning side is what matters: **daily output in full sentences**, with mistakes explained and answers at the end.
 
 Repository: [github.com/r0cstar09/fuzzy-funicular](https://github.com/r0cstar09/fuzzy-funicular)
 
 ---
 
-## Problem
+## Why this helps you learn Spanish
 
-Daily language practice only works when delivery is consistent. When lessons are prepared and sent by hand:
+Most apps optimize for recognition — tap the right word, finish the streak, move on. That does not reliably build **production**: writing and speaking your own sentences under time pressure. These lessons are built around output:
 
-- cadence drifts after busy weeks or travel
-- formatting quality varies lesson to lesson
-- a broken lesson file can slip into production unnoticed
-- pacing changes (every other day, restart mid-sequence) require manual recalculation
+- **You write every day.** Prompts are in English; you respond in Spanish. That forces active recall, not passive review.
+- **One pattern per lesson.** You repeat a single structure until it feels automatic (e.g. *Cuando era niño…* vs *Ayer llegué…*), instead of mixing ten topics and retaining none.
+- **English traps are named first.** Each lesson opens with what English speakers get wrong and the Spanish logic that replaces it — so you fix mindset before drilling forms.
+- **Spacing is automatic.** Lessons arrive on a schedule you configure (daily, every other day, etc.), which supports retention better than binge-studying once a week.
+- **Answers stay separate.** Drills run without the key in view; the answer key is at the bottom so you can self-check honestly.
 
-I needed a system that treats lessons like versioned data, validates them before send, and automates scheduling without exposing credentials in the repository.
-
----
-
-## Solution
-
-The project implements an end-to-end delivery loop:
-
-1. **Normalize lessons** into `lesson.json` files with a fixed drill schema (cognitive framing, controlled drills, contrast sets, guided writing, answer keys).
-2. **Validate all lessons** on every workflow run before attempting delivery.
-3. **Select the correct lesson** from start date, starting lesson number, and configurable cadence (including non-daily schedules).
-4. **Render learner-ready Markdown and HTML** from JSON, then send via iCloud SMTP using GitHub Actions secrets.
-
-![Repository structure for lessons, scripts, and workflow automation](/assets/fuzzy-funicular/fuzzy-funicular-01-structure.png)
+If you have studied Spanish before but still freeze when writing, this format targets that gap: **pattern → examples → many short writes → contrast → personal sentences → errors → key**.
 
 ---
 
-## Architecture and Workflow
+## What each exercise section trains
 
-```text
-lesson PDFs (reference) → normalized lesson.json + lesson.md
-        ↓
-send_daily_lesson.py (--validate-all on CI)
-        ↓
-date/cadence selector → Markdown renderer → HTML email body
-        ↓
-GitHub Actions cron / manual dispatch → SMTP send
-```
+Every lesson uses the same eight-part sequence. Together they move you from understanding *why* a pattern works to using it in your own context.
 
-**Content layer:** each `lessons/lesson-N/` folder holds source PDFs plus normalized JSON used by automation. PDFs remain reference material; JSON drives rendering.
+| Section | What you practice | What gets better |
+|--------|-------------------|------------------|
+| **1) Cognitive shift** | English trap vs Spanish logic, formula, natural examples | You stop translating literally and start choosing structures by meaning |
+| **2) Controlled recombination** | English prompts → Spanish sentences with the target pattern | Speed and accuracy producing the pattern in new contexts |
+| **3) Pattern mutation** | Transform given Spanish sentences (subject, time, polarity, etc.) | Flexibility — you own the pattern, not one frozen template |
+| **4) Contrastive discrimination** | Pick the best Spanish option between near-miss pairs | Fine distinctions (preterite vs imperfect, reflexive vs non-reflexive, etc.) |
+| **5) Guided personal writing** | Short prompts about your real life | Transfer to things you actually say — work, family, routines |
+| **6) Reverse conceptual expression** | Spanish cues → English (or explain the concept) | Deeper understanding; you can explain *why* a form fits |
+| **7) Common errors** | Typical mistakes, why they happen, corrections | You recognize your own habits before they fossilize |
+| **8) Answer key** | Full solutions for written sections | Honest self-correction without needing a tutor for every line |
 
-**Delivery layer:** `scripts/send_daily_lesson.py` discovers lessons, validates schema, selects by calendar rules, and renders email content.
-
-**Automation layer:** `.github/workflows/send-daily-lesson.yml` runs on a daily cron schedule (and manual dispatch), installs dependencies, validates every lesson, then sends the selected lesson or a manually specified lesson number.
-
-![GitHub Actions workflow with validation gate and scheduled send](/assets/fuzzy-funicular/fuzzy-funicular-02-workflow.png)
-
-The workflow reads cadence configuration from environment variables (`LESSON_START_DATE`, `LESSON_START_LESSON_NUMBER`, `LESSON_CADENCE_DAYS`) so progression can pause or resume without rewriting selection logic. Secrets (`ICLOUD_EMAIL`, `ICLOUD_APP_PASSWORD`, `RECIPIENT_EMAIL`) stay in GitHub Actions — never committed to the repo.
-
-![Lesson selection logic driven by start date and cadence](/assets/fuzzy-funicular/fuzzy-funicular-03-script-selection.png)
+Early lessons (e.g. cognates with **ser**) build confidence and sentence frames. Mid lessons (e.g. **pronominal verbs**) separate reflexive, reciprocal, passive *se*, and meaning-change pairs. Later lessons (e.g. **preterite vs imperfect**) train narrative Spanish — background vs completed events — the split that blocks many intermediate writers.
 
 ---
 
-## Structured Lesson Model
+## What the emails look like
 
-Lessons are machine-checkable JSON, not ad hoc email copy. Each file includes metadata (`pattern_id`, `difficulty`, `target_pattern`) and eight drill sections:
+Each message opens with the lesson title, pattern ID, and target grammar focus, then the cognitive framing and examples. Drill sections follow in the same order every time so you always know where you are in the workout.
 
-- cognitive shift
-- controlled recombination
-- pattern mutation
-- contrastive discrimination
-- guided personal writing
-- reverse conceptual expression
-- common errors
-- answer key
+**Lesson 1 — cognates and ser frames (A1–A2):** high-frequency *-al* cognates in natural Spanish sentences.
 
-![Representative lesson JSON schema for drill-based Spanish practice](/assets/fuzzy-funicular/fuzzy-funicular-04-lesson-json.png)
+![Lesson 1 email — header, pattern focus, and cognitive shift](/assets/fuzzy-funicular/fuzzy-funicular-email-lesson-01-top.png)
 
-This schema keeps content reusable: the same structure powers validation, rendering, and future tooling (indexing, search, or alternate channels) without rewriting lesson bodies.
+![Lesson 1 email — controlled writing drills](/assets/fuzzy-funicular/fuzzy-funicular-email-lesson-01-drills.png)
 
----
+**Lesson 25 — pronominal verbs (A2–B1):** choosing the right *se* function in context (reflexive, reciprocal, passive, chunks like *quejarse de*).
 
-## Validation and Dry-Run Safety
+![Lesson 25 email — pronominal verb pattern and framing](/assets/fuzzy-funicular/fuzzy-funicular-email-lesson-25-top.png)
 
-Before any send, the pipeline validates every `lesson.json` and fails fast on missing sections or malformed types. That prevents a single broken lesson from breaking production delivery.
+**Lesson 40 — preterite vs imperfect (A2–B1):** telling past stories with the correct tense for background vs completed events.
 
-![Validation output confirming lessons pass schema checks](/assets/fuzzy-funicular/fuzzy-funicular-05-validate-output.png)
+![Lesson 40 email — past narration pattern and examples](/assets/fuzzy-funicular/fuzzy-funicular-email-lesson-40-top.png)
 
-A `--dry-run` mode renders the selected lesson to stdout so I can review Markdown output without sending email — useful when tuning copy or testing a specific lesson number.
-
-![Dry-run preview of rendered lesson content](/assets/fuzzy-funicular/fuzzy-funicular-06-dryrun-preview.png)
+![Lesson 40 email — preterite/imperfect writing drills](/assets/fuzzy-funicular/fuzzy-funicular-email-lesson-40-drills.png)
 
 ---
 
-## Stack
+## How delivery works (brief)
 
-| Layer | Technology |
-|-------|------------|
-| Runtime | Python 3.11 |
-| Orchestration | GitHub Actions (cron + `workflow_dispatch`) |
-| Content format | JSON + Markdown |
-| Rendering | Python Markdown → HTML email template |
-| Delivery | SMTP (iCloud) via repository secrets |
-| Scheduling | Cron + configurable cadence environment variables |
+Lessons are stored as `lesson.json` files (63 lessons today, numbered 1–64 with lesson 11 still being normalized). A GitHub Actions workflow validates every file, selects the lesson for the current date and cadence settings, renders Markdown to HTML, and sends via SMTP. You can also dry-run a lesson locally or trigger a specific lesson number manually.
+
+![Scheduled workflow with validation before send](/assets/fuzzy-funicular/fuzzy-funicular-02-workflow.png)
+
+That automation exists so **practice does not depend on willpower** — the lesson shows up; you write for twenty to forty minutes; you check the key.
 
 ---
 
 ## Outcomes
 
-- **Automated daily (or custom-cadence) delivery** with a validation gate on every run.
-- **63 lesson folders** currently ship with paired `lesson.json` and `lesson.md` artifacts (lessons 1–64, with lesson 11 still pending JSON normalization).
-- **Configurable pacing** via start date, start lesson number, cadence days, and optional no-wrap behavior when the sequence completes.
-- **Separation of concerns** between reference PDFs and normalized JSON that powers automation — making content updates predictable and testable.
+- **Consistent writing habit** through scheduled email delivery
+- **63 structured lessons** spanning foundational frames through intermediate grammar
+- **Repeatable drill design** so each session has a clear start, middle, and self-check
+- **Configurable pacing** (start date, starting lesson, every-N-days cadence) without rebuilding content
 
 ---
 
-## Repository
+## Stack
 
-Full source, workflow definition, and lesson corpus: [github.com/r0cstar09/fuzzy-funicular](https://github.com/r0cstar09/fuzzy-funicular)
+Python 3.11, JSON lesson schema, Markdown → HTML rendering, GitHub Actions, iCloud SMTP.
+
+Full source: [github.com/r0cstar09/fuzzy-funicular](https://github.com/r0cstar09/fuzzy-funicular)
