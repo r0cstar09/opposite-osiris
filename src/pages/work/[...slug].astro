@@ -102,6 +102,8 @@ const { Content } = await render(entry);
 	}
 
 	.content :global(img) {
+		max-width: min(100%, 32rem);
+		height: auto;
 		border-radius: 1.5rem;
 		box-shadow: var(--shadow-sm);
 		background: var(--gradient-subtle);

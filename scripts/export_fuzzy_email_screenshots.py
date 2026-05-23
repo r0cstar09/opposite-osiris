@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Export rendered lesson HTML emails and capture PNG screenshots."""
+"""Export rendered lesson HTML emails and capture compact PNG screenshots."""
 
 from __future__ import annotations
 
@@ -9,6 +9,11 @@ from pathlib import Path
 SOURCE = Path(__file__).resolve().parents[2] / "fuzzy-funicular-source"
 OUT = Path(__file__).resolve().parents[1] / "public" / "assets" / "fuzzy-funicular"
 LESSONS = (1, 25, 40)
+VIEWPORT_WIDTH = 560
+# From container top: gradient header + cognitive framing
+PREVIEW_CLIP_HEIGHT = 480
+# From container top: header + first drill sections (blue accents, lists)
+DRILLS_CLIP_HEIGHT = 560
 
 
 def html_from_lesson(lesson_number: int) -> str:
@@ -39,29 +44,42 @@ def html_from_lesson(lesson_number: int) -> str:
     raise RuntimeError("No HTML part in message")
 
 
+def clip_container_top(page, path: Path, max_height: int) -> None:
+    container = page.locator(".container")
+    container.wait_for(state="visible")
+    box = container.bounding_box()
+    if not box:
+        raise RuntimeError(f"Could not measure .container for {path.name}")
+    height = min(int(box["height"]), max_height)
+    page.screenshot(
+        path=str(path),
+        clip={
+            "x": box["x"],
+            "y": box["y"],
+            "width": box["width"],
+            "height": height,
+        },
+    )
+
+
 def capture_with_playwright(html_paths: list[tuple[str, Path]]) -> None:
     from playwright.sync_api import sync_playwright  # noqa: PLC0415
 
     OUT.mkdir(parents=True, exist_ok=True)
     with sync_playwright() as playwright:
         browser = playwright.chromium.launch()
-        page = browser.new_page(viewport={"width": 820, "height": 900})
+        page = browser.new_page(
+            viewport={"width": VIEWPORT_WIDTH, "height": 900},
+            device_scale_factor=2,
+        )
         for name, html_path in html_paths:
             page.goto(html_path.as_uri(), wait_until="networkidle")
-            container = page.locator(".container")
-            container.wait_for(state="visible")
 
             top_path = OUT / f"fuzzy-funicular-email-{name}-top.png"
-            container.screenshot(path=str(top_path))
+            clip_container_top(page, top_path, PREVIEW_CLIP_HEIGHT)
 
-            page.evaluate(
-                """() => {
-                const content = document.querySelector('.content');
-                if (content) content.scrollIntoView({ block: 'start' });
-            }"""
-            )
             drills_path = OUT / f"fuzzy-funicular-email-{name}-drills.png"
-            page.locator(".content").screenshot(path=str(drills_path))
+            clip_container_top(page, drills_path, DRILLS_CLIP_HEIGHT)
 
         browser.close()
 
@@ -82,6 +100,10 @@ def main() -> None:
         print(f"Wrote {path}")
 
     capture_with_playwright(html_paths)
+
+    import shutil
+
+    shutil.rmtree(tmp, ignore_errors=True)
     print(f"Screenshots saved to {OUT}")
 
 
