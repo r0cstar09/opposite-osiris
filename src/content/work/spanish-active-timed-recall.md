@@ -18,7 +18,7 @@ tags:
 
 ## Overview
 
-[spanish-app.tonymuzo.dev](https://spanish-app.tonymuzo.dev/) is a custom Spanish practice system built for production, not passive recognition. The app turns Spanish study into a set of timed recall loops: hear or read a prompt, produce the answer, get graded, and send misses back into review until the pattern is actually stable.
+Spanish Active Timed Recall is a custom Spanish practice system built for production, not passive recognition. The app turns Spanish study into a set of timed recall loops: hear or read a prompt, produce the answer, get graded, and send misses back into review until the pattern is actually stable.
 
 The goal is simple: make it harder to lie to yourself about fluency. If a sentence pattern, verb form, or listening prompt breaks under time pressure, it stays visible.
 
@@ -34,8 +34,6 @@ The site is organized around a few practical training modes:
 - **Verb training.** Full-grid conjugation work supports targeted practice across tense, person, and verb families.
 - **LLM-assisted grading.** Answers are evaluated for meaning, grammar, and acceptable variation rather than exact string matching only.
 - **Progress feedback.** The UI makes completion, misses, and review state obvious so the next action is clear.
-
-The public app is live at: [spanish-app.tonymuzo.dev](https://spanish-app.tonymuzo.dev/)
 
 ---
 
@@ -90,5 +88,3 @@ This is not just a static portfolio demo. It is a working personal learning syst
 ## Outcome
 
 The result is a Spanish app that behaves more like a training system than a content library. It tracks what breaks, keeps that material in front of the learner, and pushes practice toward the skill that matters most: producing Spanish without waiting for the app to hand you the answer.
-
-Live site: [spanish-app.tonymuzo.dev](https://spanish-app.tonymuzo.dev/)
