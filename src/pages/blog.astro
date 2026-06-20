@@ -1,43 +1,76 @@
 ---
 import { getCollection } from 'astro:content';
+import BlogPostPreview from '../components/BlogPostPreview.astro';
 import ContactCTA from '../components/ContactCTA.astro';
-import Grid from '../components/Grid.astro';
 import Hero from '../components/Hero.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-// Fetch all blog posts and sort newest first
-const posts = (await getCollection('blog')).sort(
-    (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
-);
+const posts = (await getCollection('blog'))
+	.filter((post) => !post.data.draft)
+	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf());
+
+const featured = posts[0];
+const remaining = posts.slice(1);
 ---
 
 <BaseLayout
-    title="Blog | Tony Muzo"
-    description="Insights and commentary on cybersecurity, threat intelligence, and defensive strategy."
+	title="Blog | Tony Muzo"
+	description="Cybersecurity writing, defensive engineering notes, and operator-focused commentary by Tony Muzo."
 >
-    <div class="stack gap-20">
-        <main class="wrapper stack gap-8">
-            <Hero
-                title="Blog"
-                tagline="Analysis, critique, and commentary on cyber defence, operator capability, and strategic dysfunction."
-                align="start"
-            />
+	<div class="stack gap-20">
+		<main class="wrapper stack gap-10">
+			<Hero
+				title="Blog"
+				tagline="Field notes on cybersecurity, threat intelligence, defensive automation, and the operational reality behind the dashboards."
+				align="start"
+			/>
 
-            <Grid variant="offset">
-                {
-                    posts.map((post) => (
-                        <li>
-                            <!-- Reuse your existing project preview logic by inlining markup -->
-                            <a href={`/blog/${post.slug}/`}>
-                                <h3>{post.data.title}</h3>
-                                <p>{post.data.description}</p>
-                            </a>
-                        </li>
-                    ))
-                }
-            </Grid>
-        </main>
+			<section class="blog-shell" aria-label="Blog posts">
+				{posts.length > 0 ? (
+					<>
+						{featured && <BlogPostPreview post={featured} featured />}
+						{remaining.map((post) => <BlogPostPreview post={post} />)}
+					</>
+				) : (
+					<div class="empty-state">
+						<h2>No articles published yet.</h2>
+						<p>Add Markdown files to <code>src/content/blog/</code> to publish articles here.</p>
+					</div>
+				)}
+			</section>
+		</main>
 
-        <ContactCTA />
-    </div>
+		<ContactCTA />
+	</div>
 </BaseLayout>
+
+<style>
+	.blog-shell {
+		display: grid;
+		gap: 1.5rem;
+	}
+
+	.empty-state {
+		padding: 2rem;
+		border: 1px solid var(--gray-800);
+		border-radius: 1.5rem;
+		background: var(--gradient-subtle);
+		box-shadow: var(--shadow-sm);
+	}
+
+	.empty-state p {
+		margin-top: 0.75rem;
+		color: var(--gray-300);
+	}
+
+	.empty-state code {
+		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+		color: var(--gray-100);
+	}
+
+	@media (min-width: 50em) {
+		.blog-shell {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+</style>
