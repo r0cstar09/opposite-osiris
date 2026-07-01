@@ -32,7 +32,7 @@ const posts = (await getCollection('blog'))
 		<div class="wrapper stack gap-8 lg:gap-20">
 			<header class="hero">
 				<Hero
-					title="Hello, my name is Tony Muzo"
+					title="Tony Muzo"
 					tagline="I build security automation, threat intelligence reports, and cloud defense tooling."
 					align="start"
 				>
@@ -43,12 +43,26 @@ const posts = (await getCollection('blog'))
 					</div>
 				</Hero>
 
-				<img
-					alt="Tony posing for a picture"
-					width="480"
-					height="620"
-					src="/assets/tonyportrait.jpeg"
-				/>
+				<div class="id-card" aria-hidden="true">
+					<div class="id-scan"></div>
+					<div class="id-top">
+						<span class="mono-label">// operator_profile</span>
+						<span class="status"><span class="dot"></span>ONLINE</span>
+					</div>
+					<div class="id-avatar">
+						<span class="ring"></span>
+						<span class="mono">TM</span>
+					</div>
+					<div class="id-name">
+						<strong>TONY&nbsp;MUZO</strong>
+						<span>Cybersecurity Analyst</span>
+					</div>
+					<ul class="id-stats">
+						<li><span>THREAT_INTEL</span><i style="--v:92%"></i></li>
+						<li><span>AUTOMATION</span><i style="--v:88%"></i></li>
+						<li><span>DETECTION_IR</span><i style="--v:95%"></i></li>
+					</ul>
+				</div>
 			</header>
 
 			<Skills />
@@ -57,6 +71,7 @@ const posts = (await getCollection('blog'))
 		<main class="wrapper stack gap-20 lg:gap-48">
 			<section class="section with-background with-cta">
 				<header class="section-header stack gap-2 lg:gap-4">
+					<span class="mono-label">// selected_work</span>
 					<h3>Selected Work</h3>
 					<p>A few of my security engineering, automation, and threat intelligence projects.</p>
 				</header>
@@ -109,10 +124,10 @@ const posts = (await getCollection('blog'))
 
 			<section class="section with-background bg-variant">
 				<header class="section-header stack gap-2 lg:gap-4">
+					<span class="mono-label">// signal_sources</span>
 					<h3>Mentions</h3>
 					<p>
-						I have been fortunate enough to receive praise for my work in several publications. Take
-						a look below to learn more.
+						Tooling and research aligned with the platforms and standards I work across every day.
 					</p>
 				</header>
 
@@ -139,11 +154,186 @@ const posts = (await getCollection('blog'))
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		gap: 2rem;
+		gap: 2.5rem;
 	}
 
 	.roles {
-		display: none;
+		margin-top: 0.5rem;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		justify-content: center;
+	}
+
+	/* ---- Operator HUD id card (replaces portrait) ---- */
+	.id-card {
+		position: relative;
+		width: 100%;
+		max-width: 26rem;
+		padding: 1.5rem;
+		display: flex;
+		flex-direction: column;
+		gap: 1.25rem;
+		background:
+			linear-gradient(180deg, rgba(12, 18, 38, 0.9), rgba(6, 9, 20, 0.92));
+		border: 1px solid color-mix(in srgb, var(--accent-regular) 35%, transparent);
+		border-radius: 1rem;
+		clip-path: polygon(0 0, 100% 0, 100% 88%, calc(100% - 2rem) 100%, 0 100%);
+		box-shadow: var(--shadow-md), 0 0 40px color-mix(in srgb, var(--accent-regular) 18%, transparent);
+		overflow: hidden;
+		isolation: isolate;
+	}
+
+	.id-card::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		background: radial-gradient(
+			22rem 22rem at 80% 0%,
+			color-mix(in srgb, var(--accent-regular) 20%, transparent),
+			transparent 60%
+		);
+	}
+
+	.id-scan {
+		position: absolute;
+		inset: 0;
+		pointer-events: none;
+		background: repeating-linear-gradient(
+			0deg,
+			rgba(0, 234, 255, 0.05) 0 1px,
+			transparent 1px 4px
+		);
+		opacity: 0.6;
+		mix-blend-mode: screen;
+	}
+
+	.id-top {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+
+	.status {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		font-family: var(--font-mono);
+		font-size: 0.7rem;
+		letter-spacing: 0.2em;
+		color: var(--gray-200);
+	}
+
+	.dot {
+		width: 0.5rem;
+		height: 0.5rem;
+		border-radius: 999rem;
+		background: #3cff9e;
+		box-shadow: 0 0 10px #3cff9e;
+		animation: flicker 2.4s infinite;
+	}
+
+	.id-avatar {
+		position: relative;
+		align-self: center;
+		display: grid;
+		place-items: center;
+		width: 9rem;
+		height: 9rem;
+	}
+
+	.id-avatar .ring {
+		position: absolute;
+		inset: 0;
+		border-radius: 999rem;
+		background: conic-gradient(
+			from 0deg,
+			var(--neon-cyan),
+			var(--neon-purple),
+			var(--neon-magenta),
+			var(--neon-cyan)
+		);
+		-webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 4px));
+		mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 4px));
+		animation: spin 8s linear infinite;
+		filter: drop-shadow(0 0 12px color-mix(in srgb, var(--accent-regular) 60%, transparent));
+	}
+
+	.id-avatar .mono {
+		font-family: var(--font-brand);
+		font-weight: 900;
+		font-size: 2.75rem;
+		letter-spacing: 0.05em;
+		background: var(--gradient-accent);
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: transparent;
+	}
+
+	@keyframes spin {
+		to {
+			transform: rotate(360deg);
+		}
+	}
+
+	.id-name {
+		text-align: center;
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+	}
+
+	.id-name strong {
+		font-family: var(--font-brand);
+		font-weight: 800;
+		font-size: 1.25rem;
+		letter-spacing: 0.12em;
+		color: var(--gray-0);
+	}
+
+	.id-name span {
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		letter-spacing: 0.2em;
+		text-transform: uppercase;
+		color: var(--accent-regular);
+	}
+
+	.id-stats {
+		list-style: none;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.7rem;
+	}
+
+	.id-stats li {
+		display: grid;
+		grid-template-columns: 8rem 1fr;
+		align-items: center;
+		gap: 0.75rem;
+		font-family: var(--font-mono);
+		font-size: 0.68rem;
+		letter-spacing: 0.14em;
+		color: var(--gray-300);
+	}
+
+	.id-stats i {
+		position: relative;
+		height: 6px;
+		border-radius: 999rem;
+		background: rgba(255, 255, 255, 0.06);
+		overflow: hidden;
+	}
+
+	.id-stats i::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		width: var(--v);
+		background: var(--gradient-accent);
+		box-shadow: 0 0 10px color-mix(in srgb, var(--accent-regular) 70%, transparent);
 	}
 
 	.hero img {
@@ -158,20 +348,18 @@ const posts = (await getCollection('blog'))
 		.hero {
 			display: grid;
 			grid-template-columns: 6fr 4fr;
+			align-items: center;
 			padding-inline: 2.5rem;
 			gap: 3.75rem;
 		}
 
 		.roles {
-			margin-top: 0.5rem;
-			display: flex;
-			gap: 0.5rem;
+			justify-content: flex-start;
 		}
 
-		.hero img {
-			aspect-ratio: 3 / 4;
-			border-radius: 4.5rem;
-			object-fit: cover;
+		.id-card {
+			justify-self: end;
+			max-width: 24rem;
 		}
 	}
 
@@ -186,28 +374,30 @@ const posts = (await getCollection('blog'))
 		position: relative;
 	}
 
+	/* Neon glow bloom behind each section (replaces missing bg images). */
 	.with-background::before {
-		--hero-bg: var(--bg-image-subtle-2);
-
 		content: '';
 		position: absolute;
 		pointer-events: none;
 		left: 50%;
-		width: 100vw;
-		aspect-ratio: calc(2.25 / var(--bg-scale));
 		top: 0;
-		transform: translateY(-75%) translateX(-50%);
-		background:
-			url('/assets/backgrounds/noise.png') top center/220px repeat,
-			var(--hero-bg) center center / var(--bg-gradient-size) no-repeat,
-			var(--gray-999);
-		background-blend-mode: overlay, normal, normal, normal;
-		mix-blend-mode: var(--bg-blend-mode);
+		width: min(90rem, 120vw);
+		height: 40rem;
+		transform: translate(-50%, -30%);
+		background: radial-gradient(
+			50% 50% at 50% 50%,
+			color-mix(in srgb, var(--accent-regular) 16%, transparent),
+			transparent 70%
+		);
 		z-index: -1;
 	}
 
 	.with-background.bg-variant::before {
-		--hero-bg: var(--bg-image-subtle-1);
+		background: radial-gradient(
+			50% 50% at 50% 50%,
+			color-mix(in srgb, var(--neon-purple) 16%, transparent),
+			transparent 70%
+		);
 	}
 
 	.section-header {
@@ -220,6 +410,7 @@ const posts = (await getCollection('blog'))
 
 	.section-header h3 {
 		font-size: var(--text-2xl);
+		text-transform: uppercase;
 	}
 
 	@media (min-width: 50em) {
@@ -253,6 +444,8 @@ const posts = (await getCollection('blog'))
 
 		.cta {
 			grid-area: cta;
+			align-self: center;
+			justify-self: end;
 		}
 	}
 
@@ -294,16 +487,32 @@ const posts = (await getCollection('blog'))
 		justify-content: center;
 		align-items: center;
 		text-align: center;
-		border: 1px solid var(--gray-800);
-		border-radius: 1.5rem;
-		color: var(--gray-300);
+		border: 1px solid color-mix(in srgb, var(--accent-regular) 18%, transparent);
+		border-radius: 0.9rem;
+		color: var(--gray-200);
+		font-family: var(--font-mono);
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		font-size: var(--text-sm);
 		background: var(--gradient-subtle);
 		box-shadow: var(--shadow-sm);
+		transition:
+			color var(--theme-transition),
+			border-color var(--theme-transition),
+			box-shadow var(--theme-transition),
+			transform var(--theme-transition);
+	}
+
+	.mention-card:hover {
+		transform: translateY(-4px);
+		color: var(--accent-regular);
+		border-color: color-mix(in srgb, var(--accent-regular) 55%, transparent);
+		box-shadow: var(--shadow-md), 0 0 22px color-mix(in srgb, var(--accent-regular) 25%, transparent);
 	}
 
 	@media (min-width: 50em) {
 		.mention-card {
-			border-radius: 1.5rem;
+			border-radius: 1.25rem;
 			height: 9.5rem;
 		}
 	}

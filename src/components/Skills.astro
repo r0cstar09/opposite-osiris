@@ -22,41 +22,83 @@ import Icon from './Icon.astro';
 
 <style>
 	.box {
-		border: 1px solid var(--gray-800);
-		border-radius: 0.75rem;
+		position: relative;
+		border: 1px solid color-mix(in srgb, var(--accent-regular) 18%, transparent);
+		border-radius: 0.9rem;
 		padding: 1.5rem;
-		background-color: var(--gray-999_40);
+		background: var(--gray-999_40);
+		backdrop-filter: blur(10px);
+		-webkit-backdrop-filter: blur(10px);
 		box-shadow: var(--shadow-sm);
+		overflow: hidden;
+	}
+
+	/* neon top rule */
+	.box::before {
+		content: '';
+		position: absolute;
+		inset: 0 0 auto 0;
+		height: 2px;
+		background: var(--gradient-accent);
+		opacity: 0.8;
 	}
 
 	.skills {
 		display: flex;
 		flex-direction: column;
-		gap: 3rem;
+		gap: 2rem;
+	}
+
+	.skills > div {
+		position: relative;
+		padding: 1.5rem;
+		border: 1px solid color-mix(in srgb, var(--accent-regular) 12%, transparent);
+		border-radius: 0.75rem;
+		background: rgba(9, 13, 28, 0.45);
+		transition:
+			border-color var(--theme-transition),
+			box-shadow var(--theme-transition),
+			transform var(--theme-transition);
+	}
+
+	.skills > div:hover {
+		transform: translateY(-4px);
+		border-color: color-mix(in srgb, var(--accent-regular) 45%, transparent);
+		box-shadow: 0 0 26px color-mix(in srgb, var(--accent-regular) 20%, transparent);
 	}
 
 	.skills h2 {
 		font-size: var(--text-lg);
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
 	}
 
 	.skills p {
 		color: var(--gray-400);
 	}
 
+	.skills :global(svg) {
+		filter: drop-shadow(0 0 10px color-mix(in srgb, var(--accent-regular) 55%, transparent));
+	}
+
 	@media (min-width: 50em) {
 		.box {
-			border-radius: 1.5rem;
+			border-radius: 1.4rem;
 			padding: 2.5rem;
 		}
 
 		.skills {
 			display: grid;
 			grid-template-columns: repeat(3, 1fr);
-			gap: 5rem;
+			gap: 2.5rem;
+		}
+
+		.skills > div {
+			padding: 2rem;
 		}
 
 		.skills h2 {
-			font-size: var(--text-2xl);
+			font-size: var(--text-xl);
 		}
 	}
 </style>

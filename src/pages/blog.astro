@@ -33,6 +33,7 @@ const remaining = posts.slice(1);
 					</>
 				) : (
 					<div class="empty-state">
+						<span class="mono-label">// no_signal</span>
 						<h2>No articles published yet.</h2>
 						<p>Add Markdown files to <code>src/content/blog/</code> to publish articles here.</p>
 					</div>
@@ -52,10 +53,15 @@ const remaining = posts.slice(1);
 
 	.empty-state {
 		padding: 2rem;
-		border: 1px solid var(--gray-800);
-		border-radius: 1.5rem;
+		border: 1px solid color-mix(in srgb, var(--accent-regular) 22%, transparent);
+		border-radius: 1rem;
 		background: var(--gradient-subtle);
 		box-shadow: var(--shadow-sm);
+	}
+
+	.empty-state h2 {
+		margin-top: 0.75rem;
+		text-transform: uppercase;
 	}
 
 	.empty-state p {
@@ -64,8 +70,8 @@ const remaining = posts.slice(1);
 	}
 
 	.empty-state code {
-		font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-		color: var(--gray-100);
+		font-family: var(--font-mono);
+		color: var(--accent-light);
 	}
 
 	@media (min-width: 50em) {

@@ -10,7 +10,7 @@ const { align = 'center', tagline, title } = Astro.props;
 
 <div class:list={['hero stack gap-4', align]}>
 	<div class="stack gap-2">
-		<h1 class="title">{title}</h1>
+		<h1 class="title" data-text={title}>{title}</h1>
 		{tagline && <p class="tagline">{tagline}</p>}
 	</div>
 	<slot />
@@ -29,8 +29,67 @@ const { align = 'center', tagline, title } = Astro.props;
 	}
 
 	.title {
+		position: relative;
 		font-size: var(--text-3xl);
-		color: var(--gray-0);
+		text-transform: uppercase;
+		letter-spacing: 0.01em;
+		background: var(--gradient-accent);
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: transparent;
+		filter: drop-shadow(0 0 22px color-mix(in srgb, var(--accent-regular) 45%, transparent));
+	}
+
+	/* Layered glitch echoes behind the gradient text. */
+	.title::before,
+	.title::after {
+		content: attr(data-text);
+		position: absolute;
+		inset: 0;
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: transparent;
+		pointer-events: none;
+		opacity: 0.35;
+	}
+
+	.title::before {
+		background: var(--neon-cyan);
+		-webkit-background-clip: text;
+		background-clip: text;
+		transform: translate(-2px, 1px);
+		mix-blend-mode: screen;
+		animation: heroGlitch 6s steps(1) infinite;
+	}
+
+	.title::after {
+		background: var(--neon-magenta);
+		-webkit-background-clip: text;
+		background-clip: text;
+		transform: translate(2px, -1px);
+		mix-blend-mode: screen;
+		animation: heroGlitch 6s steps(1) infinite reverse;
+	}
+
+	.tagline {
+		color: var(--gray-300);
+	}
+
+	@keyframes heroGlitch {
+		0%,
+		92%,
+		100% {
+			transform: translate(0, 0);
+			opacity: 0.28;
+		}
+		93% {
+			transform: translate(-3px, 1px);
+			opacity: 0.6;
+		}
+		96% {
+			transform: translate(3px, -1px);
+			opacity: 0.5;
+		}
 	}
 
 	@media (min-width: 50em) {
@@ -49,6 +108,13 @@ const { align = 'center', tagline, title } = Astro.props;
 
 		.title {
 			font-size: var(--text-5xl);
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.title::before,
+		.title::after {
+			display: none;
 		}
 	}
 </style>

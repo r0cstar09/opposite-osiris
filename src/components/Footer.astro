@@ -19,6 +19,7 @@ const currentYear = new Date().getFullYear();
 </footer>
 <style>
 	footer {
+		position: relative;
 		display: flex;
 		flex-direction: column;
 		gap: 3rem;
@@ -26,19 +27,24 @@ const currentYear = new Date().getFullYear();
 		padding: 3rem 2rem 3rem;
 		text-align: center;
 		color: var(--gray-400);
+		font-family: var(--font-mono);
 		font-size: var(--text-sm);
+		letter-spacing: 0.04em;
+		border-top: 1px solid color-mix(in srgb, var(--accent-regular) 20%, transparent);
 	}
 
 	footer a {
-		color: var(--gray-400);
-		text-decoration: 1px solid underline transparent;
-		text-underline-offset: 0.25em;
-		transition: text-decoration-color var(--theme-transition);
+		color: var(--gray-300);
+		text-decoration: none;
+		transition:
+			color var(--theme-transition),
+			text-shadow var(--theme-transition);
 	}
 
 	footer a:hover,
 	footer a:focus {
-		text-decoration-color: currentColor;
+		color: var(--accent-regular);
+		text-shadow: 0 0 12px color-mix(in srgb, var(--accent-regular) 70%, transparent);
 	}
 
 	.group {
