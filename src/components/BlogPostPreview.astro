@@ -15,6 +15,7 @@ const date = post.data.publishDate.toLocaleDateString('en-US', {
 ---
 
 <a class:list={['blog-card', { featured }]} href={`/blog/${post.id}/`}>
+	<span class="frame"></span>
 	<div class="meta">
 		<time datetime={post.data.publishDate.toISOString()}>{date}</time>
 		{post.data.tags?.[0] && <span>{post.data.tags[0]}</span>}
@@ -26,32 +27,76 @@ const date = post.data.publishDate.toLocaleDateString('en-US', {
 			{post.data.tags.map((tag) => <li>{tag}</li>)}
 		</ul>
 	)}
-	<span class="read-more">Read article →</span>
+	<span class="read-more">Read<span class="arrow">→</span></span>
 </a>
 
 <style>
 	.blog-card {
+		position: relative;
 		display: flex;
 		min-height: 18rem;
 		flex-direction: column;
 		gap: 1rem;
 		padding: 1.25rem;
-		border: 1px solid var(--gray-800);
-		border-radius: 1.25rem;
+		border: 1px solid color-mix(in srgb, var(--accent-regular) 22%, transparent);
+		border-radius: 1rem;
 		background: var(--gradient-subtle);
 		box-shadow: var(--shadow-sm);
 		text-decoration: none;
+		isolation: isolate;
+		overflow: hidden;
 		transition:
 			border-color var(--theme-transition),
 			box-shadow var(--theme-transition),
 			transform var(--theme-transition);
 	}
 
+	.blog-card::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		z-index: 0;
+		background-image:
+			linear-gradient(var(--grid-color) 1px, transparent 1px),
+			linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+		background-size: 24px 24px;
+		opacity: 0.45;
+		pointer-events: none;
+	}
+
+	.frame {
+		position: absolute;
+		inset: 0.55rem;
+		z-index: 1;
+		pointer-events: none;
+		background:
+			linear-gradient(var(--accent-regular), var(--accent-regular)) top left / 1rem 2px no-repeat,
+			linear-gradient(var(--accent-regular), var(--accent-regular)) top left / 2px 1rem no-repeat,
+			linear-gradient(var(--accent-regular), var(--accent-regular)) bottom right / 1rem 2px no-repeat,
+			linear-gradient(var(--accent-regular), var(--accent-regular)) bottom right / 2px 1rem no-repeat;
+		opacity: 0.45;
+		transition: opacity var(--theme-transition);
+	}
+
 	.blog-card:hover,
 	.blog-card:focus-visible {
 		border-color: var(--accent-regular);
-		box-shadow: var(--shadow-md);
-		transform: translateY(-2px);
+		box-shadow: var(--shadow-md), 0 0 32px color-mix(in srgb, var(--accent-regular) 28%, transparent);
+		transform: translateY(-6px);
+	}
+
+	.blog-card:hover .frame,
+	.blog-card:focus-visible .frame {
+		opacity: 1;
+	}
+
+	.meta,
+	h2,
+	p,
+	.tags,
+	.read-more {
+		position: relative;
+		z-index: 2;
 	}
 
 	.meta {
@@ -59,7 +104,9 @@ const date = post.data.publishDate.toLocaleDateString('en-US', {
 		flex-wrap: wrap;
 		gap: 0.75rem;
 		font-size: var(--text-sm);
-		font-family: var(--font-brand);
+		font-family: var(--font-mono);
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
 		color: var(--gray-400);
 	}
 
@@ -69,7 +116,10 @@ const date = post.data.publishDate.toLocaleDateString('en-US', {
 	}
 
 	h2 {
-		font-size: var(--text-2xl);
+		font-size: var(--text-xl);
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
+		color: var(--gray-0);
 	}
 
 	p {
@@ -85,29 +135,52 @@ const date = post.data.publishDate.toLocaleDateString('en-US', {
 	}
 
 	.tags li {
-		padding: 0.25rem 0.625rem;
-		border: 1px solid var(--gray-800);
+		padding: 0.2rem 0.55rem;
+		border: 1px solid color-mix(in srgb, var(--accent-regular) 35%, transparent);
 		border-radius: 999rem;
-		font-size: var(--text-sm);
-		color: var(--gray-300);
-		background: var(--gray-999_40);
+		font-family: var(--font-mono);
+		font-size: 0.68rem;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--accent-regular);
+		background: color-mix(in srgb, var(--accent-regular) 8%, transparent);
 	}
 
 	.read-more {
 		margin-top: auto;
-		font-family: var(--font-brand);
-		font-weight: 600;
-		color: var(--accent-dark);
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		font-weight: 500;
+		letter-spacing: 0.22em;
+		text-transform: uppercase;
+		color: var(--accent-regular);
+	}
+
+	.arrow {
+		transition: transform var(--theme-transition);
+	}
+
+	.blog-card:hover .arrow,
+	.blog-card:focus-visible .arrow {
+		transform: translateX(4px);
 	}
 
 	@media (min-width: 50em) {
 		.blog-card {
 			padding: 1.75rem;
-			border-radius: 1.5rem;
+			border-radius: 1.25rem;
 		}
 
 		.blog-card.featured {
 			grid-column: span 2;
+			min-height: 20rem;
+		}
+
+		.blog-card.featured h2 {
+			font-size: var(--text-2xl);
 		}
 	}
 </style>

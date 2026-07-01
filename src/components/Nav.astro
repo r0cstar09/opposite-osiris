@@ -349,7 +349,7 @@ const isCurrentPage = (href: string) => {
 		.link[aria-current='page'] {
 			color: var(--accent-text-over);
 			background: var(--accent-regular);
-			box-shadow: var(--glow-cyan);
+			box-shadow: 0 0 16px color-mix(in srgb, var(--accent-regular) 55%, transparent);
 		}
 
 		.menu-footer {

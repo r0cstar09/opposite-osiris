@@ -45,6 +45,25 @@ const { variant } = Astro.props;
 			transform: translateY(var(--row-offset));
 		}
 
+		.grid.offset > :global(:nth-child(odd))::after {
+			content: '';
+			position: absolute;
+			right: -2rem;
+			top: 50%;
+			width: 2rem;
+			height: 1px;
+			background: linear-gradient(
+				90deg,
+				color-mix(in srgb, var(--accent-regular) 40%, transparent),
+				transparent
+			);
+			pointer-events: none;
+		}
+
+		.grid.offset > :global(li) {
+			position: relative;
+		}
+
 		/* If last row contains only one item, display it in the second column. */
 		.grid.offset > :global(:last-child:nth-child(odd)) {
 			grid-column: 2 / 3;

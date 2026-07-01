@@ -35,6 +35,7 @@ const posts = (await getCollection('blog'))
 					title="Tony Muzo"
 					tagline="I build security automation, threat intelligence reports, and cloud defense tooling."
 					align="start"
+					glitch
 				>
 					<div class="roles">
 						<Pill><Icon icon="shield" size="1.33em" /> Security Engineer</Pill>
@@ -98,6 +99,7 @@ const posts = (await getCollection('blog'))
 
 			<section class="section with-background bg-variant with-cta">
 				<header class="section-header stack gap-2 lg:gap-4">
+					<span class="mono-label">// latest_writing</span>
 					<h3>Latest Writing</h3>
 					<p>Cybersecurity notes, operator commentary, and practical defensive engineering essays.</p>
 				</header>
@@ -207,6 +209,40 @@ const posts = (await getCollection('blog'))
 		);
 		opacity: 0.6;
 		mix-blend-mode: screen;
+	}
+
+	.id-scan::after {
+		content: '';
+		position: absolute;
+		left: 0;
+		right: 0;
+		height: 40%;
+		top: -45%;
+		background: linear-gradient(
+			180deg,
+			transparent,
+			color-mix(in srgb, var(--accent-regular) 18%, transparent),
+			transparent
+		);
+		animation: cardScan 4.5s ease-in-out infinite;
+	}
+
+	@keyframes cardScan {
+		0%,
+		100% {
+			top: -45%;
+			opacity: 0;
+		}
+		15% {
+			opacity: 0.8;
+		}
+		50% {
+			top: 105%;
+			opacity: 0.8;
+		}
+		65% {
+			opacity: 0;
+		}
 	}
 
 	.id-top {
@@ -454,29 +490,69 @@ const posts = (await getCollection('blog'))
 		gap: 1rem;
 	}
 
+	@media (min-width: 50em) {
+		.blog-preview-list {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+	}
+
 	.blog-preview {
+		position: relative;
 		display: grid;
 		gap: 0.75rem;
 		padding: 1.25rem;
-		border: 1px solid var(--gray-800);
-		border-radius: 1rem;
+		border: 1px solid color-mix(in srgb, var(--accent-regular) 20%, transparent);
+		border-radius: 0.9rem;
 		background: var(--gradient-subtle);
 		box-shadow: var(--shadow-sm);
 		text-decoration: none;
+		overflow: hidden;
+		isolation: isolate;
+		transition:
+			transform var(--theme-transition),
+			border-color var(--theme-transition),
+			box-shadow var(--theme-transition);
+	}
+
+	.blog-preview::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		background: radial-gradient(
+			12rem 12rem at 100% 0%,
+			color-mix(in srgb, var(--accent-regular) 14%, transparent),
+			transparent 70%
+		);
+		pointer-events: none;
+	}
+
+	.blog-preview:hover,
+	.blog-preview:focus-visible {
+		transform: translateY(-4px);
+		border-color: var(--accent-regular);
+		box-shadow: var(--shadow-md), 0 0 24px color-mix(in srgb, var(--accent-regular) 22%, transparent);
 	}
 
 	.blog-preview span {
-		font-family: var(--font-brand);
-		font-size: var(--text-sm);
-		color: var(--gray-400);
+		position: relative;
+		font-family: var(--font-mono);
+		font-size: 0.72rem;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--accent-regular);
 	}
 
 	.blog-preview h4 {
-		font-size: var(--text-xl);
+		position: relative;
+		font-size: var(--text-lg);
+		text-transform: uppercase;
+		color: var(--gray-0);
 	}
 
 	.blog-preview p {
+		position: relative;
 		color: var(--gray-300);
+		font-size: var(--text-sm);
 	}
 
 	/* ====================================================== */

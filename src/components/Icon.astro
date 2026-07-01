@@ -24,6 +24,7 @@ const gradientId = 'icon-gradient-' + Math.round(Math.random() * 10e12).toString
 	height="40"
 	viewBox="0 0 256 256"
 	aria-hidden="true"
+	class:list={[{ glow: gradient }]}
 	stroke={gradient ? `url(#${gradientId})` : color}
 	fill={gradient ? `url(#${gradientId})` : color}
 	{...attrs}
@@ -52,5 +53,9 @@ const gradientId = 'icon-gradient-' + Math.round(Math.random() * 10e12).toString
 		vertical-align: middle;
 		width: var(--size, 1em);
 		height: var(--size, 1em);
+	}
+
+	svg.glow {
+		filter: drop-shadow(0 0 6px color-mix(in srgb, var(--accent-regular) 45%, transparent));
 	}
 </style>

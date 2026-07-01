@@ -424,6 +424,35 @@ h5 {
 	}
 }
 
+@keyframes scanBeam {
+	0%,
+	18% {
+		top: -4%;
+		opacity: 0;
+	}
+	22% {
+		opacity: 0.55;
+	}
+	55% {
+		top: 104%;
+		opacity: 0.55;
+	}
+	60%,
+	100% {
+		top: 104%;
+		opacity: 0;
+	}
+}
+
+/* Reusable frosted panel surface */
+.glass-panel {
+	background: rgba(7, 10, 22, 0.72);
+	border: 1px solid color-mix(in srgb, var(--accent-regular) 22%, transparent);
+	backdrop-filter: blur(12px) saturate(130%);
+	-webkit-backdrop-filter: blur(12px) saturate(130%);
+	box-shadow: var(--shadow-sm);
+}
+
 @media (prefers-reduced-motion: reduce) {
 	*,
 	*::before,

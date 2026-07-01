@@ -33,6 +33,18 @@ const currentYear = new Date().getFullYear();
 		border-top: 1px solid color-mix(in srgb, var(--accent-regular) 20%, transparent);
 	}
 
+	footer::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 50%;
+		width: min(24rem, 60%);
+		height: 1px;
+		transform: translateX(-50%);
+		background: var(--gradient-accent);
+		box-shadow: 0 0 16px color-mix(in srgb, var(--accent-regular) 60%, transparent);
+	}
+
 	footer a {
 		color: var(--gray-300);
 		text-decoration: none;

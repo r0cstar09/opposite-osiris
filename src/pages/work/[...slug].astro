@@ -2,7 +2,6 @@
 import { type CollectionEntry, getCollection, render } from 'astro:content';
 
 import ContactCTA from '../../components/ContactCTA.astro';
-import Hero from '../../components/Hero.astro';
 import Icon from '../../components/Icon.astro';
 import Pill from '../../components/Pill.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
@@ -11,9 +10,6 @@ interface Props {
 	entry: CollectionEntry<'work'>;
 }
 
-// This is a dynamic route that generates a page for every Markdown file in src/content/
-// Read more about dynamic routes and this `getStaticPaths` function in the Astro docs:
-// https://docs.astro.build/en/core-concepts/routing/#dynamic-routes
 export async function getStaticPaths() {
 	const work = await getCollection('work');
 	return work.map((entry) => ({
@@ -24,63 +20,111 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content } = await render(entry);
+const published = entry.data.publishDate.toLocaleDateString('en-US', {
+	year: 'numeric',
+	month: 'long',
+	day: 'numeric',
+});
 ---
 
 <BaseLayout title={entry.data.title} description={entry.data.description}>
 	<div class="stack gap-20">
-		<div class="stack gap-15">
-			<header>
-				<div class="wrapper stack gap-2">
-					<a class="back-link" href="/work/"><Icon icon="arrow-left" /> Work</a>
-					<Hero title={entry.data.title} align="start">
-						<div class="details">
-							<div class="tags">
-								{entry.data.tags.map((t) => <Pill>{t}</Pill>)}
-							</div>
-							<p class="description">{entry.data.description}</p>
-						</div>
-					</Hero>
+		<article class="wrapper article-shell">
+			<header class="article-header stack gap-4">
+				<a class="back-link" href="/work/"><Icon icon="arrow-left" /> Work</a>
+				<div class="eyebrow">
+					<time datetime={entry.data.publishDate.toISOString()}>{published}</time>
+					<span>Case study</span>
 				</div>
-			</header>
-			<main class="wrapper">
-				<div class="stack gap-10 content">
-					{entry.data.img && <img src={entry.data.img} alt={entry.data.img_alt || ''} />}
-					<div class="content">
-						<Content />
+				<h1>{entry.data.title}</h1>
+				<p class="description">{entry.data.description}</p>
+				{entry.data.tags.length > 0 && (
+					<div class="tags" aria-label="Project tags">
+						{entry.data.tags.map((tag) => <Pill>{tag}</Pill>)}
 					</div>
-				</div>
-			</main>
-		</div>
+				)}
+			</header>
+
+			{entry.data.img && (
+				<img
+					class="hero-image"
+					src={entry.data.img}
+					alt={entry.data.img_alt || ''}
+					loading="eager"
+					decoding="async"
+				/>
+			)}
+
+			<div class="prose">
+				<Content />
+			</div>
+		</article>
+
 		<ContactCTA />
 	</div>
 </BaseLayout>
 
 <style>
-	header {
-		padding-bottom: 2.5rem;
+	.article-shell {
+		max-width: 58rem;
+	}
+
+	.article-header {
+		padding-bottom: 2rem;
 		border-bottom: 1px solid color-mix(in srgb, var(--accent-regular) 22%, transparent);
 	}
 
 	.back-link {
-		display: none;
-	}
-
-	.back-link {
+		display: inline-flex;
+		width: fit-content;
+		align-items: center;
+		gap: 0.5rem;
 		font-family: var(--font-mono);
+		font-size: 0.8rem;
+		font-weight: 500;
 		text-transform: uppercase;
 		letter-spacing: 0.16em;
-		font-size: 0.8rem;
 		color: var(--accent-regular);
 		text-decoration: none;
+		transition: text-shadow var(--theme-transition);
 	}
 
-	.details {
+	.back-link:hover,
+	.back-link:focus-visible {
+		text-shadow: 0 0 12px color-mix(in srgb, var(--accent-regular) 70%, transparent);
+	}
+
+	.eyebrow {
 		display: flex;
-		flex-direction: column;
-		padding: 0.5rem;
-		gap: 1.5rem;
-		justify-content: space-between;
-		align-items: center;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		font-family: var(--font-mono);
+		font-size: var(--text-sm);
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--gray-400);
+	}
+
+	.eyebrow span::before {
+		content: '• ';
+		color: var(--accent-regular);
+	}
+
+	h1 {
+		max-width: 16ch;
+		font-size: var(--text-3xl);
+		text-transform: uppercase;
+		background: var(--gradient-accent);
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: transparent;
+		filter: drop-shadow(0 0 18px color-mix(in srgb, var(--accent-regular) 35%, transparent));
+	}
+
+	.description {
+		max-width: 62ch;
+		font-size: var(--text-lg);
+		color: var(--gray-300);
 	}
 
 	.tags {
@@ -89,90 +133,105 @@ const { Content } = await render(entry);
 		gap: 0.5rem;
 	}
 
-	.description {
-		font-size: var(--text-lg);
-		max-width: 54ch;
-		color: var(--gray-300);
+	.hero-image {
+		width: 100%;
+		margin-block: 2rem;
+		border: 1px solid color-mix(in srgb, var(--accent-regular) 30%, transparent);
+		border-radius: 0.9rem;
+		box-shadow: var(--shadow-md), 0 0 30px color-mix(in srgb, var(--accent-regular) 14%, transparent);
 	}
 
-	.content {
-		max-width: 68ch;
-		margin-inline: auto;
+	.prose {
+		max-width: 72ch;
+		margin: 2.5rem auto 0;
+		font-size: var(--text-md);
+		color: var(--gray-200);
 	}
 
-	.content > :global(* + *) {
-		margin-top: 1rem;
+	.prose :global(* + *) {
+		margin-top: 1.15rem;
 	}
 
-	.content :global(h1),
-	.content :global(h2),
-	.content :global(h3),
-	.content :global(h4),
-	.content :global(h5) {
-		margin: 2.25rem 0 1rem;
+	.prose :global(h2),
+	.prose :global(h3),
+	.prose :global(h4) {
+		margin-top: 2.25rem;
 		text-transform: uppercase;
 		letter-spacing: 0.02em;
+		color: var(--gray-0);
 	}
 
-	.content :global(h2) {
+	.prose :global(h2) {
+		font-size: var(--text-3xl);
 		padding-bottom: 0.45rem;
 		border-bottom: 1px solid color-mix(in srgb, var(--accent-regular) 25%, transparent);
 	}
 
-	.content :global(img) {
+	.prose :global(h3) {
+		font-size: var(--text-2xl);
+	}
+
+	.prose :global(p),
+	.prose :global(li) {
+		line-height: 1.75;
+	}
+
+	.prose :global(ul),
+	.prose :global(ol) {
+		padding-inline-start: 1.5rem;
+	}
+
+	.prose :global(strong) {
+		color: var(--gray-0);
+	}
+
+	.prose :global(img) {
 		max-width: min(100%, 40rem);
 		height: auto;
 		border-radius: 0.9rem;
 		box-shadow: var(--shadow-md), 0 0 30px color-mix(in srgb, var(--accent-regular) 14%, transparent);
-		background: var(--gradient-subtle);
 		border: 1px solid color-mix(in srgb, var(--accent-regular) 30%, transparent);
 	}
 
-	.content :global(strong) {
-		color: var(--gray-0);
-	}
-
-	.content :global(blockquote) {
-		font-size: var(--text-lg);
-		font-family: var(--font-brand);
-		font-weight: 600;
-		line-height: 1.2;
-		padding: 1rem 1.5rem;
+	.prose :global(blockquote) {
+		padding: 1rem 1.25rem;
 		border-inline-start: 0.25rem solid var(--accent-regular);
-		background: color-mix(in srgb, var(--accent-regular) 8%, transparent);
 		border-radius: 0 0.5rem 0.5rem 0;
+		background: color-mix(in srgb, var(--accent-regular) 8%, transparent);
 		color: var(--gray-0);
+		font-family: var(--font-brand);
+		font-size: var(--text-lg);
+		font-weight: 600;
 	}
 
-	.content :global(code) {
-		font-family: var(--font-mono);
-		font-size: 0.9em;
-		color: var(--accent-light);
-		background: color-mix(in srgb, var(--accent-regular) 12%, transparent);
-		border: 1px solid color-mix(in srgb, var(--accent-regular) 22%, transparent);
+	.prose :global(code) {
 		padding: 0.12em 0.4em;
 		border-radius: 0.35rem;
+		background: color-mix(in srgb, var(--accent-regular) 12%, transparent);
+		border: 1px solid color-mix(in srgb, var(--accent-regular) 22%, transparent);
+		color: var(--accent-light);
+		font-family: var(--font-mono);
+		font-size: 0.92em;
 	}
 
-	.content :global(pre) {
-		font-family: var(--font-mono);
-		background: rgba(4, 7, 16, 0.9);
+	.prose :global(pre) {
+		overflow-x: auto;
+		padding: 1.25rem;
 		border: 1px solid color-mix(in srgb, var(--accent-regular) 26%, transparent);
 		border-radius: 0.7rem;
-		padding: 1.25rem;
-		overflow-x: auto;
+		background: rgba(4, 7, 16, 0.9);
 		box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.5);
 	}
 
-	.content :global(pre code) {
+	.prose :global(pre code) {
+		padding: 0;
 		background: transparent;
 		border: 0;
-		padding: 0;
 		color: inherit;
 		font-size: 0.85rem;
 	}
 
-	.content :global(table) {
+	.prose :global(table) {
 		display: block;
 		width: 100%;
 		overflow-x: auto;
@@ -180,14 +239,14 @@ const { Content } = await render(entry);
 		font-size: 0.92rem;
 	}
 
-	.content :global(th),
-	.content :global(td) {
+	.prose :global(th),
+	.prose :global(td) {
 		border: 1px solid color-mix(in srgb, var(--accent-regular) 20%, transparent);
 		padding: 0.6rem 0.85rem;
 		text-align: left;
 	}
 
-	.content :global(th) {
+	.prose :global(th) {
 		font-family: var(--font-mono);
 		text-transform: uppercase;
 		letter-spacing: 0.06em;
@@ -196,11 +255,11 @@ const { Content } = await render(entry);
 		background: color-mix(in srgb, var(--accent-regular) 14%, transparent);
 	}
 
-	.content :global(tbody tr:nth-child(even) td) {
+	.prose :global(tbody tr:nth-child(even) td) {
 		background: rgba(255, 255, 255, 0.02);
 	}
 
-	.content :global(hr) {
+	.prose :global(hr) {
 		height: 1px;
 		border: 0;
 		background: var(--gradient-accent);
@@ -208,40 +267,22 @@ const { Content } = await render(entry);
 		margin: 2rem 0;
 	}
 
-	.content :global(a) {
+	.prose :global(a) {
 		color: var(--link-color);
 		text-decoration: underline;
 		text-decoration-color: color-mix(in srgb, var(--link-color) 40%, transparent);
 		text-underline-offset: 0.2em;
-		transition:
-			color var(--theme-transition),
-			text-shadow var(--theme-transition);
+		transition: text-shadow var(--theme-transition);
 	}
 
-	.content :global(a:hover),
-	.content :global(a:focus) {
+	.prose :global(a:hover),
+	.prose :global(a:focus) {
 		text-shadow: 0 0 12px color-mix(in srgb, var(--link-color) 70%, transparent);
 	}
 
-	.back-link:hover,
-	.back-link:focus {
-		text-shadow: 0 0 12px color-mix(in srgb, var(--accent-regular) 70%, transparent);
-	}
-
 	@media (min-width: 50em) {
-		.back-link {
-			display: block;
-			align-self: flex-start;
-		}
-
-		.details {
-			flex-direction: row;
-			gap: 2.5rem;
-			align-items: flex-start;
-		}
-
-		.content :global(blockquote) {
-			font-size: var(--text-xl);
+		h1 {
+			font-size: var(--text-4xl);
 		}
 	}
 </style>

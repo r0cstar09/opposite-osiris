@@ -21,6 +21,7 @@ const { title, description } = Astro.props;
 	</head>
 	<body>
 		<div class="cyber-grid" aria-hidden="true"></div>
+		<div class="scan-beam" aria-hidden="true"></div>
 		<div class="stack backgrounds">
 			<Nav />
 			<slot />
@@ -60,8 +61,39 @@ const { title, description } = Astro.props;
 				animation: gridPan 26s linear infinite;
 			}
 
+			/* Occasional horizontal scan sweep across the viewport. */
+			.scan-beam {
+				position: fixed;
+				inset: 0;
+				z-index: -1;
+				pointer-events: none;
+				overflow: hidden;
+			}
+
+			.scan-beam::after {
+				content: '';
+				position: absolute;
+				left: 0;
+				right: 0;
+				height: 2px;
+				top: -4%;
+				background: linear-gradient(
+					90deg,
+					transparent,
+					color-mix(in srgb, var(--accent-regular) 70%, transparent),
+					transparent
+				);
+				box-shadow: 0 0 24px color-mix(in srgb, var(--accent-regular) 55%, transparent);
+				animation: scanBeam 9s ease-in-out infinite;
+				opacity: 0.55;
+			}
+
 			@media (forced-colors: active) {
 				.cyber-grid {
+					display: none;
+				}
+
+				.scan-beam {
 					display: none;
 				}
 			}
