@@ -16,13 +16,13 @@ const projects = (await getCollection('work')).sort(
 	description="Selected cybersecurity, automation, and language-learning engineering projects by Tony Muzo"
 >
 	<div class="stack gap-20">
-		<main class="wrapper stack gap-8">
+		<main class="wrapper stack gap-10">
 			<Hero
 				title="Selected Work"
 				tagline="Focused write-ups for security engineering, automation, and personal learning systems I have built."
 				align="start"
 			/>
-			<Grid variant="offset">
+			<Grid>
 				{
 					projects.map((project) => (
 						<li>

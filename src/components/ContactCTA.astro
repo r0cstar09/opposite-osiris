@@ -3,45 +3,50 @@ import CallToAction from './CallToAction.astro';
 import Icon from './Icon.astro';
 ---
 
-<aside>
-	<div class="copy stack gap-4">
-		<span class="mono-label">// establish_connection</span>
-		<h2>Interested in working together?</h2>
-		<p class="subtitle">
-			Available for security engineering, threat intelligence reporting, and automation tooling projects.
-		</p>
+<aside class="wrapper">
+	<div class="panel">
+		<div class="copy stack gap-4">
+			<h2>Interested in working together?</h2>
+			<p class="subtitle">
+				Available for security engineering, threat intelligence reporting, and automation tooling
+				projects.
+			</p>
+		</div>
+		<CallToAction href="mailto:tony@tonymuzo.dev">
+			Contact Tony
+			<Icon icon="paper-plane-tilt" size="1.2em" />
+		</CallToAction>
 	</div>
-	<CallToAction href="mailto:tony@tonymuzo.dev">
-		Contact Tony
-		<Icon icon="paper-plane-tilt" size="1.2em" />
-	</CallToAction>
 </aside>
 
 <style>
 	aside {
+		padding-block: 1rem 4rem;
+	}
+
+	.panel {
 		position: relative;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		gap: 2.5rem;
-		border-top: 1px solid color-mix(in srgb, var(--accent-regular) 30%, transparent);
-		border-bottom: 1px solid color-mix(in srgb, var(--accent-regular) 30%, transparent);
-		padding: 5rem 1.5rem;
-		background: var(--gray-999_40);
-		backdrop-filter: blur(8px);
-		-webkit-backdrop-filter: blur(8px);
+		gap: 2rem;
+		text-align: center;
+		padding: 3rem 1.5rem;
+		border: 1px solid var(--border);
+		border-radius: var(--radius-xl);
+		background: var(--surface);
 		box-shadow: var(--shadow-sm);
 		overflow: hidden;
 	}
 
-	aside::before {
+	.panel::before {
 		content: '';
 		position: absolute;
 		inset: 0;
 		pointer-events: none;
 		background: radial-gradient(
-			40rem 20rem at 50% 120%,
-			color-mix(in srgb, var(--accent-regular) 18%, transparent),
+			32rem 14rem at 50% -20%,
+			var(--accent-subtle),
 			transparent 70%
 		);
 	}
@@ -49,37 +54,34 @@ import Icon from './Icon.astro';
 	.copy {
 		position: relative;
 		align-items: center;
-		text-align: center;
 	}
 
 	h2 {
 		font-size: var(--text-xl);
-		max-width: 18ch;
-		text-transform: uppercase;
+		max-width: 24ch;
 	}
 
 	.subtitle {
-		font-size: var(--text-md);
-		max-width: 44ch;
-		color: var(--gray-300);
+		font-size: var(--text-base);
+		max-width: 50ch;
+		color: var(--text-muted);
 	}
 
 	@media (min-width: 50em) {
-		aside {
-			padding: 7rem 5rem;
+		.panel {
+			padding: 4rem 4.5rem;
 			flex-direction: row;
-			flex-wrap: wrap;
 			justify-content: space-between;
+			text-align: left;
 			gap: 3rem;
 		}
 
 		.copy {
 			align-items: flex-start;
-			text-align: left;
 		}
 
 		h2 {
-			font-size: var(--text-3xl);
+			font-size: var(--text-2xl);
 		}
 	}
 </style>

@@ -7,27 +7,30 @@ interface Props {
 }
 
 const {
-	title = 'Tony Muzo: Cybersecurity Portfolio',
-	description = 'Tony Muzo Cyber Portfolio',
+	title = 'Tony Muzo — Cybersecurity Analyst & Threat Intelligence',
+	description = 'Tony Muzo is a cybersecurity analyst specializing in threat intelligence, incident response, and security automation.',
 } = Astro.props;
 ---
 
 <meta charset="UTF-8" />
 <meta name="description" property="og:description" content={description} />
-<meta name="viewport" content="width=device-width" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="generator" content={Astro.generator} />
 <title>{title}</title>
 
-<meta name="theme-color" content="#05070f" />
+<meta property="og:title" content={title} />
+<meta property="og:type" content="website" />
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f6f8fb" />
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#070b13" />
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
-	href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@500;600;700;800;900&display=swap"
+	href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap"
 	rel="stylesheet"
 />
 <script is:inline>
-	// This code is inlined in the head to make dark mode instant & blocking.
+	// This code is inlined in the head to make theme switching instant & blocking.
 	const getThemePreference = () => {
 		if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
 			return localStorage.getItem('theme');

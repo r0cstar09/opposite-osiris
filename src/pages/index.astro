@@ -1,14 +1,12 @@
 ---
 import { getCollection } from 'astro:content';
-// Component Imports
-import CallToAction from '../components/CallToAction.astro';
 // Page section components
 import ContactCTA from '../components/ContactCTA.astro';
 import Grid from '../components/Grid.astro';
-import Hero from '../components/Hero.astro';
 import Icon from '../components/Icon.astro';
 import Pill from '../components/Pill.astro';
 import PortfolioPreview from '../components/PortfolioPreview.astro';
+import BlogPostPreview from '../components/BlogPostPreview.astro';
 import Skills from '../components/Skills.astro';
 // Layout import — provides basic page elements: <head>, <nav>, <footer> etc.
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -22,128 +20,119 @@ const posts = (await getCollection('blog'))
 	.filter((post) => !post.data.draft)
 	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
 	.slice(0, 3);
-
-// Full Astro Component Syntax:
-// https://docs.astro.build/basics/astro-components/
 ---
 
 <BaseLayout>
-	<div class="stack gap-20 lg:gap-48">
-		<div class="wrapper stack gap-8 lg:gap-20">
+	<div class="stack gap-20 lg:gap-30">
+		<div class="wrapper stack gap-15">
 			<header class="hero">
-				<Hero
-					title="Tony Muzo"
-					tagline="I build security automation, threat intelligence reports, and cloud defense tooling."
-					align="start"
-					glitch
-				>
+				<div class="intro stack gap-4">
+					<p class="status-chip">
+						<span class="dot" aria-hidden="true"></span>
+						Open to new opportunities
+					</p>
+					<h1 class="headline">Tony Muzo</h1>
+					<p class="tagline">
+						I build security automation, threat intelligence reports, and cloud defense tooling —
+						turning attacker behavior into actionable defense.
+					</p>
 					<div class="roles">
-						<Pill><Icon icon="shield" size="1.33em" /> Security Engineer</Pill>
-						<Pill><Icon icon="code" size="1.33em" /> Automation Builder</Pill>
-						<Pill><Icon icon="book-open" size="1.33em" /> Threat Intel Writer</Pill>
+						<Pill><Icon icon="shield" size="1.1em" /> Security Engineer</Pill>
+						<Pill><Icon icon="code" size="1.1em" /> Automation Builder</Pill>
+						<Pill><Icon icon="book-open" size="1.1em" /> Threat Intel Writer</Pill>
 					</div>
-				</Hero>
+					<div class="cta-row">
+						<a class="btn primary" href="/blog/">
+							Read my writing
+							<Icon icon="arrow-right" size="1.1em" />
+						</a>
+						<a class="btn secondary" href="/work/">View work</a>
+					</div>
+				</div>
 
-				<div class="id-card" aria-hidden="true">
-					<div class="id-scan"></div>
-					<div class="id-top">
-						<span class="mono-label">// operator_profile</span>
-						<span class="status"><span class="dot"></span>ONLINE</span>
+				<div class="profile-card">
+					<div class="pc-head">
+						<span class="pc-avatar" aria-hidden="true">TM</span>
+						<div class="pc-name">
+							<strong>Tony Muzo</strong>
+							<span>Cybersecurity Analyst · Toronto, CA</span>
+						</div>
 					</div>
-					<div class="id-avatar">
-						<span class="ring"></span>
-						<span class="mono">TM</span>
-					</div>
-					<div class="id-name">
-						<strong>TONY&nbsp;MUZO</strong>
-						<span>Cybersecurity Analyst</span>
-					</div>
-					<ul class="id-stats">
-						<li><span>THREAT_INTEL</span><i style="--v:92%"></i></li>
-						<li><span>AUTOMATION</span><i style="--v:88%"></i></li>
-						<li><span>DETECTION_IR</span><i style="--v:95%"></i></li>
-					</ul>
+					<dl class="pc-facts">
+						<div>
+							<dt>Experience</dt>
+							<dd>8+ years across SOC, IR & threat intelligence</dd>
+						</div>
+						<div>
+							<dt>Certifications</dt>
+							<dd>GIAC GSEC · GCIH · GFACT</dd>
+						</div>
+						<div>
+							<dt>Background</dt>
+							<dd>Cisco Security, Symantec, public sector</dd>
+						</div>
+						<div>
+							<dt>Focus</dt>
+							<dd>Ransomware ecosystems & MITRE ATT&CK mapping</dd>
+						</div>
+					</dl>
+					<a class="pc-link" href="/about/">More about me <span aria-hidden="true">→</span></a>
 				</div>
 			</header>
 
 			<Skills />
 		</div>
 
-		<main class="wrapper stack gap-20 lg:gap-48">
-			<section class="section with-background with-cta">
-				<header class="section-header stack gap-2 lg:gap-4">
-					<span class="mono-label">// selected_work</span>
-					<h3>Selected Work</h3>
-					<p>A few of my security engineering, automation, and threat intelligence projects.</p>
+		<main class="stack gap-20 lg:gap-30">
+			<section class="wrapper section">
+				<header class="section-header">
+					<div class="stack gap-2">
+						<h2>Selected Work</h2>
+						<p>Security engineering, automation, and threat intelligence projects.</p>
+					</div>
+					<a class="view-all" href="/work/">View all <span aria-hidden="true">→</span></a>
 				</header>
 
-				<div class="gallery">
-					<Grid variant="offset">
-						{
-							projects.map((project) => (
-								<li>
-									<PortfolioPreview project={project} />
-								</li>
-							))
-						}
-					</Grid>
-				</div>
-
-				<div class="cta">
-					<CallToAction href="/work/">
-						View All
-						<Icon icon="arrow-right" size="1.2em" />
-					</CallToAction>
-				</div>
-			</section>
-
-			<section class="section with-background bg-variant with-cta">
-				<header class="section-header stack gap-2 lg:gap-4">
-					<span class="mono-label">// latest_writing</span>
-					<h3>Latest Writing</h3>
-					<p>Cybersecurity notes, operator commentary, and practical defensive engineering essays.</p>
-				</header>
-
-				<div class="gallery blog-preview-list">
+				<Grid>
 					{
-						posts.map((post) => (
-							<a class="blog-preview" href={`/blog/${post.id}/`}>
-								<span>{post.data.publishDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
-								<h4>{post.data.title}</h4>
-								<p>{post.data.description}</p>
-							</a>
+						projects.map((project) => (
+							<li>
+								<PortfolioPreview project={project} />
+							</li>
 						))
 					}
-				</div>
+				</Grid>
+			</section>
 
-				<div class="cta">
-					<CallToAction href="/blog/">
-						Read Blog
-						<Icon icon="arrow-right" size="1.2em" />
-					</CallToAction>
+			<section class="wrapper section">
+				<header class="section-header">
+					<div class="stack gap-2">
+						<h2>Latest Writing</h2>
+						<p>Practitioner analysis of the threats and incidents that matter this week.</p>
+					</div>
+					<a class="view-all" href="/blog/">All articles <span aria-hidden="true">→</span></a>
+				</header>
+
+				<div class="blog-preview-list">
+					{posts.map((post) => <BlogPostPreview post={post} />)}
 				</div>
 			</section>
 
-			<section class="section with-background bg-variant">
-				<header class="section-header stack gap-2 lg:gap-4">
-					<span class="mono-label">// signal_sources</span>
-					<h3>Mentions</h3>
-					<p>
-						Tooling and research aligned with the platforms and standards I work across every day.
-					</p>
+			<section class="wrapper section">
+				<header class="section-header">
+					<div class="stack gap-2">
+						<h2>Platforms & Training</h2>
+						<p>Tooling and standards I work across every day.</p>
+					</div>
 				</header>
 
-				<div class="gallery">
-					<Grid variant="small">
-						{
-							['GitHub', 'SANS Institute', 'Wazuh', 'Cisco Secure', 'OffSec'].map((brand) => (
-								<li class="mention-card">
-									<p>{brand}</p>
-								</li>
-							))
-						}
-					</Grid>
-				</div>
+				<ul class="brand-row">
+					{
+						['GitHub', 'SANS Institute', 'Wazuh', 'Cisco Secure', 'OffSec', 'MITRE ATT&CK'].map(
+							(brand) => <li>{brand}</li>,
+						)
+					}
+				</ul>
 			</section>
 		</main>
 
@@ -152,444 +141,326 @@ const posts = (await getCollection('blog'))
 </BaseLayout>
 
 <style>
+	/* ---- Hero ---- */
 	.hero {
 		display: flex;
 		flex-direction: column;
-		align-items: center;
 		gap: 2.5rem;
+		padding-top: 1rem;
 	}
 
-	.roles {
-		margin-top: 0.5rem;
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5rem;
-		justify-content: center;
-	}
-
-	/* ---- Operator HUD id card (replaces portrait) ---- */
-	.id-card {
-		position: relative;
-		width: 100%;
-		max-width: 26rem;
-		padding: 1.5rem;
-		display: flex;
-		flex-direction: column;
-		gap: 1.25rem;
-		background:
-			linear-gradient(180deg, rgba(12, 18, 38, 0.9), rgba(6, 9, 20, 0.92));
-		border: 1px solid color-mix(in srgb, var(--accent-regular) 35%, transparent);
-		border-radius: 1rem;
-		clip-path: polygon(0 0, 100% 0, 100% 88%, calc(100% - 2rem) 100%, 0 100%);
-		box-shadow: var(--shadow-md), 0 0 40px color-mix(in srgb, var(--accent-regular) 18%, transparent);
-		overflow: hidden;
-		isolation: isolate;
-	}
-
-	.id-card::before {
-		content: '';
-		position: absolute;
-		inset: 0;
-		z-index: -1;
-		background: radial-gradient(
-			22rem 22rem at 80% 0%,
-			color-mix(in srgb, var(--accent-regular) 20%, transparent),
-			transparent 60%
-		);
-	}
-
-	.id-scan {
-		position: absolute;
-		inset: 0;
-		pointer-events: none;
-		background: repeating-linear-gradient(
-			0deg,
-			rgba(0, 234, 255, 0.05) 0 1px,
-			transparent 1px 4px
-		);
-		opacity: 0.6;
-		mix-blend-mode: screen;
-	}
-
-	.id-scan::after {
-		content: '';
-		position: absolute;
-		left: 0;
-		right: 0;
-		height: 40%;
-		top: -45%;
-		background: linear-gradient(
-			180deg,
-			transparent,
-			color-mix(in srgb, var(--accent-regular) 18%, transparent),
-			transparent
-		);
-		animation: cardScan 4.5s ease-in-out infinite;
-	}
-
-	@keyframes cardScan {
-		0%,
-		100% {
-			top: -45%;
-			opacity: 0;
-		}
-		15% {
-			opacity: 0.8;
-		}
-		50% {
-			top: 105%;
-			opacity: 0.8;
-		}
-		65% {
-			opacity: 0;
-		}
-	}
-
-	.id-top {
-		display: flex;
+	.intro {
 		align-items: center;
-		justify-content: space-between;
+		text-align: center;
 	}
 
-	.status {
+	.status-chip {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.4rem;
-		font-family: var(--font-mono);
-		font-size: 0.7rem;
-		letter-spacing: 0.2em;
-		color: var(--gray-200);
+		gap: 0.5rem;
+		padding: 0.35rem 0.9rem;
+		border: 1px solid var(--border);
+		border-radius: 999rem;
+		background: var(--surface);
+		font-size: 0.8125rem;
+		font-weight: 500;
+		color: var(--text);
 	}
 
 	.dot {
 		width: 0.5rem;
 		height: 0.5rem;
 		border-radius: 999rem;
-		background: #3cff9e;
-		box-shadow: 0 0 10px #3cff9e;
-		animation: flicker 2.4s infinite;
+		background: var(--success);
+		box-shadow: 0 0 0 3px color-mix(in srgb, var(--success) 20%, transparent);
 	}
 
-	.id-avatar {
-		position: relative;
-		align-self: center;
+	.headline {
+		font-size: var(--text-4xl);
+	}
+
+	.tagline {
+		max-width: 46ch;
+		font-size: var(--text-md);
+		line-height: 1.65;
+		color: var(--text-muted);
+		text-wrap: pretty;
+	}
+
+	.roles {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		justify-content: center;
+	}
+
+	.cta-row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		margin-top: 0.75rem;
+		justify-content: center;
+	}
+
+	.btn {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.55em;
+		padding: 0.7em 1.5em;
+		border-radius: 0.65rem;
+		border: 1px solid transparent;
+		font-weight: 600;
+		font-size: var(--text-base);
+		text-decoration: none;
+		line-height: 1.1;
+		transition:
+			background-color var(--theme-transition),
+			border-color var(--theme-transition),
+			color var(--theme-transition),
+			box-shadow var(--theme-transition),
+			transform var(--theme-transition);
+	}
+
+	.btn.primary {
+		color: var(--accent-text-over);
+		background: var(--accent);
+		box-shadow: var(--shadow-sm);
+	}
+
+	.btn.primary:hover,
+	.btn.primary:focus-visible {
+		background: var(--accent-strong);
+		color: var(--accent-text-over);
+		transform: translateY(-1px);
+		box-shadow: var(--shadow-md);
+	}
+
+	.btn.secondary {
+		color: var(--text-strong);
+		background: var(--surface);
+		border-color: var(--border-strong);
+	}
+
+	.btn.secondary:hover,
+	.btn.secondary:focus-visible {
+		border-color: var(--accent-border);
+		color: var(--accent);
+		transform: translateY(-1px);
+	}
+
+	/* ---- Profile card ---- */
+	.profile-card {
+		width: 100%;
+		max-width: 26rem;
+		margin-inline: auto;
+		display: flex;
+		flex-direction: column;
+		gap: 1.25rem;
+		padding: 1.75rem;
+		background: var(--surface);
+		border: 1px solid var(--border);
+		border-radius: var(--radius-xl);
+		box-shadow: var(--shadow-md);
+	}
+
+	.pc-head {
+		display: flex;
+		align-items: center;
+		gap: 1rem;
+		padding-bottom: 1.25rem;
+		border-bottom: 1px solid var(--border);
+	}
+
+	.pc-avatar {
 		display: grid;
 		place-items: center;
-		width: 9rem;
-		height: 9rem;
-	}
-
-	.id-avatar .ring {
-		position: absolute;
-		inset: 0;
+		width: 3.5rem;
+		height: 3.5rem;
 		border-radius: 999rem;
-		background: conic-gradient(
-			from 0deg,
-			var(--neon-cyan),
-			var(--neon-purple),
-			var(--neon-magenta),
-			var(--neon-cyan)
-		);
-		-webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 4px));
-		mask: radial-gradient(farthest-side, transparent calc(100% - 4px), #000 calc(100% - 4px));
-		animation: spin 8s linear infinite;
-		filter: drop-shadow(0 0 12px color-mix(in srgb, var(--accent-regular) 60%, transparent));
-	}
-
-	.id-avatar .mono {
 		font-family: var(--font-brand);
-		font-weight: 900;
-		font-size: 2.75rem;
-		letter-spacing: 0.05em;
-		background: var(--gradient-accent);
-		-webkit-background-clip: text;
-		background-clip: text;
-		color: transparent;
+		font-weight: 700;
+		font-size: 1.15rem;
+		color: var(--accent);
+		background: var(--accent-subtle);
+		border: 1px solid var(--accent-border);
 	}
 
-	@keyframes spin {
-		to {
-			transform: rotate(360deg);
-		}
-	}
-
-	.id-name {
-		text-align: center;
+	.pc-name {
 		display: flex;
 		flex-direction: column;
-		gap: 0.25rem;
+		gap: 0.15rem;
 	}
 
-	.id-name strong {
+	.pc-name strong {
 		font-family: var(--font-brand);
-		font-weight: 800;
-		font-size: 1.25rem;
-		letter-spacing: 0.12em;
-		color: var(--gray-0);
+		font-size: var(--text-md);
+		color: var(--text-strong);
 	}
 
-	.id-name span {
-		font-family: var(--font-mono);
-		font-size: 0.72rem;
-		letter-spacing: 0.2em;
-		text-transform: uppercase;
-		color: var(--accent-regular);
+	.pc-name span {
+		font-size: 0.8125rem;
+		color: var(--text-muted);
 	}
 
-	.id-stats {
-		list-style: none;
-		padding: 0;
+	.pc-facts {
 		display: flex;
 		flex-direction: column;
-		gap: 0.7rem;
+		gap: 0.9rem;
+		margin: 0;
 	}
 
-	.id-stats li {
+	.pc-facts div {
 		display: grid;
-		grid-template-columns: 8rem 1fr;
-		align-items: center;
+		grid-template-columns: 7rem 1fr;
 		gap: 0.75rem;
-		font-family: var(--font-mono);
-		font-size: 0.68rem;
-		letter-spacing: 0.14em;
-		color: var(--gray-300);
+		align-items: baseline;
 	}
 
-	.id-stats i {
-		position: relative;
-		height: 6px;
-		border-radius: 999rem;
-		background: rgba(255, 255, 255, 0.06);
-		overflow: hidden;
+	.pc-facts dt {
+		font-size: 0.75rem;
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--text-muted);
 	}
 
-	.id-stats i::after {
-		content: '';
-		position: absolute;
-		inset: 0;
-		width: var(--v);
-		background: var(--gradient-accent);
-		box-shadow: 0 0 10px color-mix(in srgb, var(--accent-regular) 70%, transparent);
+	.pc-facts dd {
+		margin: 0;
+		font-size: 0.9rem;
+		color: var(--text);
 	}
 
-	.hero img {
-		aspect-ratio: 5 / 4;
-		object-fit: cover;
-		object-position: top;
-		border-radius: 1.5rem;
-		box-shadow: var(--shadow-md);
+	.pc-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		font-size: var(--text-sm);
+		font-weight: 600;
+		color: var(--accent);
+		text-decoration: none;
+	}
+
+	.pc-link:hover {
+		color: var(--accent-strong);
 	}
 
 	@media (min-width: 50em) {
 		.hero {
 			display: grid;
-			grid-template-columns: 6fr 4fr;
+			grid-template-columns: 6fr 5fr;
 			align-items: center;
-			padding-inline: 2.5rem;
-			gap: 3.75rem;
+			gap: 4rem;
+			padding-top: 2rem;
 		}
 
-		.roles {
+		.intro {
+			align-items: flex-start;
+			text-align: left;
+		}
+
+		.headline {
+			font-size: var(--text-5xl);
+		}
+
+		.tagline {
+			font-size: var(--text-lg);
+		}
+
+		.roles,
+		.cta-row {
 			justify-content: flex-start;
 		}
 
-		.id-card {
+		.profile-card {
 			justify-self: end;
-			max-width: 24rem;
+			margin-inline: 0;
 		}
 	}
 
-	/* ====================================================== */
-
+	/* ---- Sections ---- */
 	.section {
 		display: grid;
 		gap: 2rem;
 	}
 
-	.with-background {
-		position: relative;
-	}
-
-	/* Neon glow bloom behind each section (replaces missing bg images). */
-	.with-background::before {
-		content: '';
-		position: absolute;
-		pointer-events: none;
-		left: 50%;
-		top: 0;
-		width: min(90rem, 120vw);
-		height: 40rem;
-		transform: translate(-50%, -30%);
-		background: radial-gradient(
-			50% 50% at 50% 50%,
-			color-mix(in srgb, var(--accent-regular) 16%, transparent),
-			transparent 70%
-		);
-		z-index: -1;
-	}
-
-	.with-background.bg-variant::before {
-		background: radial-gradient(
-			50% 50% at 50% 50%,
-			color-mix(in srgb, var(--neon-purple) 16%, transparent),
-			transparent 70%
-		);
-	}
-
 	.section-header {
-		justify-self: center;
-		text-align: center;
-		max-width: 50ch;
-		font-size: var(--text-md);
-		color: var(--gray-300);
+		display: flex;
+		flex-direction: column;
+		gap: 1rem;
+		align-items: flex-start;
 	}
 
-	.section-header h3 {
+	.section-header h2 {
 		font-size: var(--text-2xl);
-		text-transform: uppercase;
+	}
+
+	.section-header p {
+		color: var(--text-muted);
+		max-width: 50ch;
+	}
+
+	.view-all {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		font-size: var(--text-sm);
+		font-weight: 600;
+		color: var(--accent);
+		text-decoration: none;
+		white-space: nowrap;
+	}
+
+	.view-all:hover {
+		color: var(--accent-strong);
 	}
 
 	@media (min-width: 50em) {
-		.section {
-			grid-template-columns: repeat(4, 1fr);
-			grid-template-areas: 'header header header header' 'gallery gallery gallery gallery';
-			gap: 5rem;
-		}
-
-		.section.with-cta {
-			grid-template-areas: 'header header header cta' 'gallery gallery gallery gallery';
-		}
-
 		.section-header {
-			grid-area: header;
-			font-size: var(--text-lg);
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: flex-end;
 		}
 
-		.section-header h3 {
-			font-size: var(--text-4xl);
-		}
-
-		.with-cta .section-header {
-			justify-self: flex-start;
-			text-align: left;
-		}
-
-		.gallery {
-			grid-area: gallery;
-		}
-
-		.cta {
-			grid-area: cta;
-			align-self: center;
-			justify-self: end;
+		.section-header h2 {
+			font-size: var(--text-3xl);
 		}
 	}
 
 	.blog-preview-list {
 		display: grid;
-		gap: 1rem;
+		gap: 1.25rem;
 	}
 
 	@media (min-width: 50em) {
 		.blog-preview-list {
 			grid-template-columns: repeat(3, minmax(0, 1fr));
+			gap: 1.5rem;
 		}
 	}
 
-	.blog-preview {
-		position: relative;
-		display: grid;
-		gap: 0.75rem;
-		padding: 1.25rem;
-		border: 1px solid color-mix(in srgb, var(--accent-regular) 20%, transparent);
-		border-radius: 0.9rem;
-		background: var(--gradient-subtle);
-		box-shadow: var(--shadow-sm);
-		text-decoration: none;
-		overflow: hidden;
-		isolation: isolate;
-		transition:
-			transform var(--theme-transition),
-			border-color var(--theme-transition),
-			box-shadow var(--theme-transition);
-	}
-
-	.blog-preview::before {
-		content: '';
-		position: absolute;
-		inset: 0;
-		background: radial-gradient(
-			12rem 12rem at 100% 0%,
-			color-mix(in srgb, var(--accent-regular) 14%, transparent),
-			transparent 70%
-		);
-		pointer-events: none;
-	}
-
-	.blog-preview:hover,
-	.blog-preview:focus-visible {
-		transform: translateY(-4px);
-		border-color: var(--accent-regular);
-		box-shadow: var(--shadow-md), 0 0 24px color-mix(in srgb, var(--accent-regular) 22%, transparent);
-	}
-
-	.blog-preview span {
-		position: relative;
-		font-family: var(--font-mono);
-		font-size: 0.72rem;
-		letter-spacing: 0.14em;
-		text-transform: uppercase;
-		color: var(--accent-regular);
-	}
-
-	.blog-preview h4 {
-		position: relative;
-		font-size: var(--text-lg);
-		text-transform: uppercase;
-		color: var(--gray-0);
-	}
-
-	.blog-preview p {
-		position: relative;
-		color: var(--gray-300);
-		font-size: var(--text-sm);
-	}
-
-	/* ====================================================== */
-
-	.mention-card {
+	.brand-row {
 		display: flex;
-		height: 7rem;
-		justify-content: center;
-		align-items: center;
-		text-align: center;
-		border: 1px solid color-mix(in srgb, var(--accent-regular) 18%, transparent);
-		border-radius: 0.9rem;
-		color: var(--gray-200);
-		font-family: var(--font-mono);
-		letter-spacing: 0.12em;
-		text-transform: uppercase;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		padding: 0;
+		list-style: none;
+	}
+
+	.brand-row li {
+		padding: 0.65rem 1.25rem;
+		border: 1px solid var(--border);
+		border-radius: 999rem;
+		background: var(--surface);
+		color: var(--text);
+		font-weight: 500;
 		font-size: var(--text-sm);
-		background: var(--gradient-subtle);
-		box-shadow: var(--shadow-sm);
 		transition:
-			color var(--theme-transition),
 			border-color var(--theme-transition),
-			box-shadow var(--theme-transition),
-			transform var(--theme-transition);
+			color var(--theme-transition);
 	}
 
-	.mention-card:hover {
-		transform: translateY(-4px);
-		color: var(--accent-regular);
-		border-color: color-mix(in srgb, var(--accent-regular) 55%, transparent);
-		box-shadow: var(--shadow-md), 0 0 22px color-mix(in srgb, var(--accent-regular) 25%, transparent);
-	}
-
-	@media (min-width: 50em) {
-		.mention-card {
-			border-radius: 1.25rem;
-			height: 9.5rem;
-		}
+	.brand-row li:hover {
+		border-color: var(--accent-border);
+		color: var(--text-strong);
 	}
 </style>

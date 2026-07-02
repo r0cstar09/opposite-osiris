@@ -1,62 +1,40 @@
 ---
-import Icon from './Icon.astro';
-
 const currentYear = new Date().getFullYear();
 ---
 
 <footer>
 	<div class="group">
-		<p>
-			Designed & Developed in Toronto with <a href="https://astro.build/">Astro</a>
-			<Icon icon="rocket-launch" size="1.2em" />
-		</p>
+		<p>Designed & developed in Toronto.</p>
 		<p>&copy; {currentYear} Tony Muzo</p>
 	</div>
 	<p class="socials">
-		<a href="https://github.com/r0cstar09"> GitHub</a>
+		<a href="https://github.com/r0cstar09">GitHub</a>
+		<a href="https://www.linkedin.com/in/anthony-muzonzini-20702/">LinkedIn</a>
 		<a href="mailto:tony@tonymuzo.dev">Email</a>
 	</p>
 </footer>
 <style>
 	footer {
-		position: relative;
 		display: flex;
 		flex-direction: column;
-		gap: 3rem;
+		gap: 1.5rem;
 		margin-top: auto;
-		padding: 3rem 2rem 3rem;
+		padding: 2.5rem 2rem;
 		text-align: center;
-		color: var(--gray-400);
-		font-family: var(--font-mono);
+		color: var(--text-muted);
 		font-size: var(--text-sm);
-		letter-spacing: 0.04em;
-		border-top: 1px solid color-mix(in srgb, var(--accent-regular) 20%, transparent);
-	}
-
-	footer::before {
-		content: '';
-		position: absolute;
-		top: 0;
-		left: 50%;
-		width: min(24rem, 60%);
-		height: 1px;
-		transform: translateX(-50%);
-		background: var(--gradient-accent);
-		box-shadow: 0 0 16px color-mix(in srgb, var(--accent-regular) 60%, transparent);
+		border-top: 1px solid var(--border);
 	}
 
 	footer a {
-		color: var(--gray-300);
+		color: var(--text-muted);
 		text-decoration: none;
-		transition:
-			color var(--theme-transition),
-			text-shadow var(--theme-transition);
+		transition: color var(--theme-transition);
 	}
 
 	footer a:hover,
 	footer a:focus {
-		color: var(--accent-regular);
-		text-shadow: 0 0 12px color-mix(in srgb, var(--accent-regular) 70%, transparent);
+		color: var(--accent);
 	}
 
 	.group {
@@ -68,7 +46,7 @@ const currentYear = new Date().getFullYear();
 	.socials {
 		display: flex;
 		justify-content: center;
-		gap: 1rem;
+		gap: 1.5rem;
 		flex-wrap: wrap;
 	}
 
@@ -81,7 +59,7 @@ const currentYear = new Date().getFullYear();
 
 		.group {
 			flex-direction: row;
-			gap: 1rem;
+			gap: 1.5rem;
 			flex-wrap: wrap;
 		}
 

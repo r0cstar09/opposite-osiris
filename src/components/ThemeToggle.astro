@@ -13,11 +13,11 @@ import Icon from './Icon.astro';
 <style>
 	button {
 		display: flex;
-		border: 0;
+		border: 1px solid var(--border);
 		border-radius: 999rem;
 		padding: 0;
-		background-color: rgba(5, 7, 15, 0.85);
-		box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--accent-regular) 40%, transparent);
+		background-color: var(--surface);
+		box-shadow: var(--shadow-sm);
 		cursor: pointer;
 	}
 
@@ -29,21 +29,20 @@ import Icon from './Icon.astro';
 		width: 2rem;
 		height: 2rem;
 		font-size: 1rem;
-		color: var(--accent-regular);
+		color: var(--text-muted);
 	}
 
 	.icon.light::before {
 		content: '';
 		z-index: -1;
 		position: absolute;
-		inset: 0;
-		background-color: var(--accent-regular);
+		inset: 2px;
+		background-color: var(--accent);
 		border-radius: 999rem;
-		box-shadow: 0 0 16px color-mix(in srgb, var(--accent-regular) 75%, transparent);
 	}
 
 	:global(.theme-dark) .icon.light::before {
-		transform: translateX(100%);
+		transform: translateX(calc(100% + 4px));
 	}
 
 	:global(.theme-dark) .icon.dark,

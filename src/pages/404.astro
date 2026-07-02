@@ -7,12 +7,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <BaseLayout title="Not Found" description="404 Error — this page was not found">
 	<div class="wrapper stack notfound">
-		<span class="mono-label">// signal_lost — error_404</span>
-		<Hero
-			title="Page Not Found"
-			tagline="The node you requested is off the grid. Let's route you back to safety."
-			glitch
-		/>
+		<p class="code">404</p>
+		<Hero title="Page Not Found" tagline="This page doesn't exist — let's get you back on track." />
 		<CallToAction href="/">
 			Return Home
 			<Icon icon="arrow-right" size="1.2em" />
@@ -26,5 +22,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 		text-align: center;
 		gap: 2rem;
 		padding-block: 5rem 8rem;
+	}
+
+	.code {
+		font-family: var(--font-mono);
+		font-weight: 600;
+		font-size: var(--text-sm);
+		letter-spacing: 0.2em;
+		color: var(--accent);
+		padding: 0.35rem 0.9rem;
+		border: 1px solid var(--accent-border);
+		border-radius: 999rem;
+		background: var(--accent-subtle);
 	}
 </style>

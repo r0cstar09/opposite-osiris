@@ -3,16 +3,14 @@ interface Props {
 	title: string;
 	tagline?: string;
 	align?: 'start' | 'center';
-	/** Enable RGB glitch echoes on the title (best for short headings). */
-	glitch?: boolean;
 }
 
-const { align = 'center', glitch = false, tagline, title } = Astro.props;
+const { align = 'center', tagline, title } = Astro.props;
 ---
 
 <div class:list={['hero stack gap-4', align]}>
 	<div class="stack gap-2">
-		<h1 class:list={['title', { glitch }]} data-text={title}>{title}</h1>
+		<h1 class="title">{title}</h1>
 		{tagline && <p class="tagline">{tagline}</p>}
 	</div>
 	<slot />
@@ -26,96 +24,24 @@ const { align = 'center', glitch = false, tagline, title } = Astro.props;
 
 	.title,
 	.tagline {
-		max-width: 37ch;
+		max-width: 40ch;
 		margin-inline: auto;
 	}
 
 	.title {
-		position: relative;
 		font-size: var(--text-3xl);
-		text-transform: uppercase;
-		letter-spacing: 0.01em;
-		background: var(--gradient-accent);
-		-webkit-background-clip: text;
-		background-clip: text;
-		color: transparent;
-		filter: drop-shadow(0 0 22px color-mix(in srgb, var(--accent-regular) 45%, transparent));
-	}
-
-	.title:not(.glitch)::before,
-	.title:not(.glitch)::after {
-		display: none;
-	}
-
-	.title::before,
-	.title::after {
-		content: attr(data-text);
-		position: absolute;
-		inset: 0;
-		-webkit-background-clip: text;
-		background-clip: text;
-		color: transparent;
-		pointer-events: none;
-		opacity: 0.35;
-	}
-
-	.title.glitch::before,
-	.title.glitch::after {
-		display: block;
-	}
-
-	.title::before {
-		background: var(--neon-cyan);
-		-webkit-background-clip: text;
-		background-clip: text;
-		transform: translate(-2px, 1px);
-		mix-blend-mode: screen;
-		animation: heroGlitch 6s steps(1) infinite;
-	}
-
-	.title::after {
-		background: var(--neon-magenta);
-		-webkit-background-clip: text;
-		background-clip: text;
-		transform: translate(2px, -1px);
-		mix-blend-mode: screen;
-		animation: heroGlitch 6s steps(1) infinite reverse;
+		color: var(--text-strong);
 	}
 
 	.tagline {
-		color: var(--gray-300);
-		font-size: 1.05em;
+		color: var(--text-muted);
+		font-size: var(--text-md);
 		line-height: 1.65;
-		max-width: 42ch;
-	}
-
-	.start .tagline {
-		border-inline-start: 2px solid var(--accent-regular);
-		padding-inline-start: 1rem;
-	}
-
-	@keyframes heroGlitch {
-		0%,
-		92%,
-		100% {
-			transform: translate(0, 0);
-			opacity: 0.28;
-		}
-		93% {
-			transform: translate(-3px, 1px);
-			opacity: 0.6;
-		}
-		96% {
-			transform: translate(3px, -1px);
-			opacity: 0.5;
-		}
+		max-width: 54ch;
+		text-wrap: pretty;
 	}
 
 	@media (min-width: 50em) {
-		.hero {
-			font-size: var(--text-xl);
-		}
-
 		.start {
 			text-align: start;
 		}
@@ -126,14 +52,11 @@ const { align = 'center', glitch = false, tagline, title } = Astro.props;
 		}
 
 		.title {
-			font-size: var(--text-5xl);
+			font-size: var(--text-4xl);
 		}
-	}
 
-	@media (prefers-reduced-motion: reduce) {
-		.title::before,
-		.title::after {
-			display: none;
+		.tagline {
+			font-size: var(--text-lg);
 		}
 	}
 </style>

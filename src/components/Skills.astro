@@ -2,103 +2,91 @@
 import Icon from './Icon.astro';
 ---
 
-<section class="box skills">
-	<div class="stack gap-2 lg:gap-4">
-		<Icon icon="terminal-window" color="var(--accent-regular)" size="2.5rem" gradient />
+<section class="skills">
+	<div class="skill">
+		<span class="icon-chip"><Icon icon="book-open" size="1.4rem" /></span>
 		<h2>Threat Intelligence</h2>
-		<p>Profiling ransomware groups, mapping adversary TTPs, and producing high‑impact intelligence that drives defensive engineering.</p>
+		<p>
+			Profiling ransomware groups, mapping adversary TTPs to MITRE ATT&CK, and producing
+			intelligence that drives defensive engineering.
+		</p>
 	</div>
-	<div class="stack gap-2 lg:gap-4">
-		<Icon icon="trophy" color="var(--accent-regular)" size="2.5rem" gradient />
+	<div class="skill">
+		<span class="icon-chip"><Icon icon="code" size="1.4rem" /></span>
 		<h2>Security Automation</h2>
-		<p>Building tooling and pipelines that eliminate manual workload, accelerate investigations, and strengthen SOC efficiency.</p>
+		<p>
+			Building tooling and pipelines that eliminate manual workload, accelerate investigations, and
+			strengthen SOC efficiency.
+		</p>
 	</div>
-	<div class="stack gap-2 lg:gap-4">
-		<Icon icon="strategy" color="var(--accent-regular)" size="2.5rem" gradient />
+	<div class="skill">
+		<span class="icon-chip"><Icon icon="shield" size="1.4rem" /></span>
 		<h2>Detection & Incident Response</h2>
-		<p>Developing detections, coordinating incident response workflows, and translating complex attacker behavior into actionable defense.</p>
+		<p>
+			Developing detections, coordinating incident response workflows, and translating complex
+			attacker behavior into actionable defense.
+		</p>
 	</div>
 </section>
 
 <style>
-	.box {
-		position: relative;
-		border: 1px solid color-mix(in srgb, var(--accent-regular) 18%, transparent);
-		border-radius: 0.9rem;
-		padding: 1.5rem;
-		background: var(--gray-999_40);
-		backdrop-filter: blur(10px);
-		-webkit-backdrop-filter: blur(10px);
-		box-shadow: var(--shadow-sm);
-		overflow: hidden;
-	}
-
-	/* neon top rule */
-	.box::before {
-		content: '';
-		position: absolute;
-		inset: 0 0 auto 0;
-		height: 2px;
-		background: var(--gradient-accent);
-		opacity: 0.8;
-	}
-
 	.skills {
 		display: flex;
 		flex-direction: column;
-		gap: 2rem;
+		gap: 1.25rem;
 	}
 
-	.skills > div {
-		position: relative;
-		padding: 1.5rem;
-		border: 1px solid color-mix(in srgb, var(--accent-regular) 12%, transparent);
-		border-radius: 0.75rem;
-		background: rgba(9, 13, 28, 0.45);
+	.skill {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75rem;
+		padding: 1.75rem;
+		border: 1px solid var(--border);
+		border-radius: var(--radius-lg);
+		background: var(--surface);
+		box-shadow: var(--shadow-sm);
 		transition:
 			border-color var(--theme-transition),
 			box-shadow var(--theme-transition),
 			transform var(--theme-transition);
 	}
 
-	.skills > div:hover {
-		transform: translateY(-4px);
-		border-color: color-mix(in srgb, var(--accent-regular) 45%, transparent);
-		box-shadow: 0 0 26px color-mix(in srgb, var(--accent-regular) 20%, transparent);
+	.skill:hover {
+		transform: translateY(-3px);
+		border-color: var(--accent-border);
+		box-shadow: var(--shadow-md);
 	}
 
-	.skills h2 {
+	.icon-chip {
+		display: grid;
+		place-items: center;
+		width: 2.75rem;
+		height: 2.75rem;
+		border-radius: 0.75rem;
+		color: var(--accent);
+		background: var(--accent-subtle);
+		border: 1px solid var(--accent-border);
+	}
+
+	.skill h2 {
 		font-size: var(--text-lg);
-		text-transform: uppercase;
-		letter-spacing: 0.04em;
 	}
 
-	.skills p {
-		color: var(--gray-400);
-	}
-
-	.skills :global(svg) {
-		filter: drop-shadow(0 0 10px color-mix(in srgb, var(--accent-regular) 55%, transparent));
+	.skill p {
+		color: var(--text-muted);
+		font-size: 0.9375rem;
+		line-height: 1.65;
 	}
 
 	@media (min-width: 50em) {
-		.box {
-			border-radius: 1.4rem;
-			padding: 2.5rem;
-		}
-
 		.skills {
 			display: grid;
 			grid-template-columns: repeat(3, 1fr);
-			gap: 2.5rem;
+			gap: 1.5rem;
 		}
 
-		.skills > div {
+		.skill {
 			padding: 2rem;
-		}
-
-		.skills h2 {
-			font-size: var(--text-xl);
 		}
 	}
 </style>

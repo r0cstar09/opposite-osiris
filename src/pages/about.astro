@@ -27,32 +27,32 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <span class="c">$</span> location
 <span class="o">&gt; Toronto, CA</span>
 <span class="c">$</span> status
-<span class="o ok">&gt; [OK] available_for_work</span><span class="cursor">▋</span></pre>
+<span class="o ok">&gt; [OK] available_for_work</span></pre>
 				</div>
 			</Hero>
 
 			<h2 class="section-title">Background</h2>
 			<div class="content">
 				<p>
-					I am a cybersecurity professional with 8+ years of experience across Threat Intelligence, Incident Response, and Security Operations. 
+					I am a cybersecurity professional with 8+ years of experience across Threat Intelligence, Incident Response, and Security Operations.
 					I progressed from SOC analyst roles into leading investigations, producing ransomware-focused threat intelligence, and developing actionable
 					detection opportunities for blue teams.
 				</p>
 				<p>
-					My work focuses on profiling threat actors, analyzing TTPs, and translating complex technical behaviors into intelligence products that 
-					support SOC, IR, and executive decision-making. I specialize in ransomware ecosystem analysis, MITRE ATT&CK mapping, and producing 
+					My work focuses on profiling threat actors, analyzing TTPs, and translating complex technical behaviors into intelligence products that
+					support SOC, IR, and executive decision-making. I specialize in ransomware ecosystem analysis, MITRE ATT&CK mapping, and producing
 					intelligence deliverables enriched with IOCs, behavioral signatures, and defensive recommendations.
 				</p>
 				<p>
-					Across roles at One Arrow Consulting, the City of St. John’s, Cisco Security, and Symantec, I have supported organizations through 
-					investigations of malware outbreaks, credential compromises, phishing campaigns, and high‑volume alert environments. My work integrates 
+					Across roles at One Arrow Consulting, the City of St. John’s, Cisco Security, and Symantec, I have supported organizations through
+					investigations of malware outbreaks, credential compromises, phishing campaigns, and high‑volume alert environments. My work integrates
 					operational vigilance with strategic intelligence to strengthen overall defensive posture.
 				</p>
 			</div>
 			<h2 class="section-title">Education</h2>
 			<div class="content">
 				<p>
-					I have completed multiple technical and communication-focused programs through SANS Institute, AWS training pathways, 
+					I have completed multiple technical and communication-focused programs through SANS Institute, AWS training pathways,
 					and cybersecurity writing and speaking courses. I continue to pursue advanced security engineering and intelligence education
 					to refine my investigative and reporting capabilities.
 				</p>
@@ -70,7 +70,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 			</div>
 			<h2 class="section-title">Certifications</h2>
 			<div class="content">
-				<ul>
+				<ul class="cert-list">
 					<li>
 						<a href="https://www.credly.com/earner/earned/badge/6c995198-44cd-489b-afbc-fe0f808e6f19" target="_blank" rel="noopener">
 							GFACT – GIAC Foundational Cybersecurity Technologies
@@ -108,105 +108,104 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 	.about {
 		display: flex;
 		flex-direction: column;
-		gap: 3.5rem;
+		gap: 3rem;
 	}
 
-	/* Terminal card (replaces portrait) */
+	/* Terminal card — intentionally dark in both themes. */
 	.terminal {
 		margin-top: 1.75rem;
 		max-width: 34rem;
+		width: 100%;
 		margin-inline: auto;
-		border: 1px solid color-mix(in srgb, var(--accent-regular) 32%, transparent);
-		border-radius: 0.8rem;
+		border: 1px solid #26324b;
+		border-radius: var(--radius-md);
 		overflow: hidden;
-		background: rgba(5, 8, 18, 0.92);
-		box-shadow: var(--shadow-md), 0 0 34px color-mix(in srgb, var(--accent-regular) 16%, transparent);
+		background: #0b1220;
+		box-shadow: var(--shadow-md);
+		text-align: left;
 	}
 
 	.term-bar {
 		display: flex;
 		align-items: center;
-		gap: 0.4rem;
+		gap: 0.45rem;
 		padding: 0.6rem 0.9rem;
-		background: rgba(12, 18, 38, 0.9);
-		border-bottom: 1px solid color-mix(in srgb, var(--accent-regular) 22%, transparent);
+		background: #111a2c;
+		border-bottom: 1px solid #26324b;
 	}
 
 	.tb-dot {
-		width: 0.62rem;
-		height: 0.62rem;
+		width: 0.6rem;
+		height: 0.6rem;
 		border-radius: 999rem;
-		background: var(--accent-regular);
-		box-shadow: 0 0 8px color-mix(in srgb, var(--accent-regular) 70%, transparent);
-		opacity: 0.85;
-	}
-
-	.tb-dot:nth-child(2) {
-		background: var(--neon-purple);
-		box-shadow: 0 0 8px var(--neon-purple);
-	}
-	.tb-dot:nth-child(3) {
-		background: var(--neon-magenta);
-		box-shadow: 0 0 8px var(--neon-magenta);
+		background: #3a4a68;
 	}
 
 	.tb-title {
 		margin-left: auto;
 		font-family: var(--font-mono);
 		font-size: 0.72rem;
-		letter-spacing: 0.16em;
+		letter-spacing: 0.12em;
 		text-transform: uppercase;
-		color: var(--gray-400);
+		color: #6b7a97;
 	}
 
 	.term-body {
 		margin: 0;
 		padding: 1.25rem 1.4rem;
 		font-family: var(--font-mono);
-		font-size: 0.86rem;
+		font-size: 0.85rem;
 		line-height: 1.9;
-		color: var(--gray-200);
+		color: #c4cfe1;
 		white-space: pre-wrap;
 		word-break: break-word;
 	}
 
 	.term-body .c {
-		color: var(--accent-regular);
+		color: #4cc3f7;
 	}
 	.term-body .o {
-		color: var(--gray-100);
+		color: #e8eef8;
 	}
 	.term-body .o.ok {
-		color: #3cff9e;
-	}
-
-	.cursor {
-		color: var(--accent-regular);
-		animation: flicker 1.1s steps(2) infinite;
+		color: #34d399;
 	}
 
 	section {
 		display: flex;
 		flex-direction: column;
 		gap: 0.5rem;
-		color: var(--gray-200);
+		color: var(--text);
 	}
 
 	.section-title {
 		grid-column-start: 1;
-		font-size: var(--text-xl);
-		color: var(--gray-0);
-		text-transform: uppercase;
-		letter-spacing: 0.04em;
+		font-size: var(--text-lg);
+		color: var(--text-strong);
 	}
 
 	.content {
 		grid-column: 2 / 4;
-		color: var(--gray-200);
+		color: var(--text);
+		font-size: var(--text-base);
+		line-height: 1.75;
+	}
+
+	.content p + p {
+		margin-top: 1rem;
+	}
+
+	.content ul {
+		padding-inline-start: 1.25rem;
+	}
+
+	.content li + li {
+		margin-top: 0.5rem;
 	}
 
 	.content :global(strong) {
-		color: var(--gray-0);
+		color: var(--text-strong);
+		font-weight: 600;
 	}
 
 	.content :global(a) {
@@ -214,29 +213,72 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 		text-decoration: underline;
 		text-decoration-color: color-mix(in srgb, var(--link-color) 40%, transparent);
 		text-underline-offset: 0.2em;
-		transition:
-			color var(--theme-transition),
-			text-shadow var(--theme-transition);
+		transition: color var(--theme-transition);
 	}
 
 	.content :global(a:hover),
 	.content :global(a:focus) {
-		text-shadow: 0 0 12px color-mix(in srgb, var(--link-color) 70%, transparent);
+		color: var(--accent-strong);
+		text-decoration-color: currentColor;
+	}
+
+	.cert-list {
+		list-style: none;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.cert-list li + li {
+		margin-top: 0;
+	}
+
+	.cert-list a {
+		display: block;
+		padding: 0.85rem 1.1rem;
+		border: 1px solid var(--border);
+		border-radius: var(--radius-sm);
+		background: var(--surface);
+		color: var(--text-strong);
+		font-weight: 500;
+		font-size: 0.9375rem;
+		text-decoration: none;
+		transition:
+			border-color var(--theme-transition),
+			box-shadow var(--theme-transition),
+			color var(--theme-transition);
+	}
+
+	.cert-list a:hover,
+	.cert-list a:focus {
+		border-color: var(--accent-border);
+		color: var(--accent);
+		box-shadow: var(--shadow-sm);
 	}
 
 	@media (min-width: 50em) {
 		.about {
 			display: grid;
 			grid-template-columns: 1fr 60% 1fr;
+			gap: 2.5rem 3rem;
 		}
 
 		.about > :global(:first-child) {
-			grid-column-start: 2;
+			grid-column: 1 / -1;
 		}
 
-		section {
-			display: contents;
+		.section-title {
+			grid-column: 1 / 2;
+			justify-self: end;
+			text-align: right;
 			font-size: var(--text-lg);
+			position: relative;
+			padding-top: 0.15rem;
+		}
+
+		.content {
+			grid-column: 2 / 3;
 		}
 	}
 </style>
