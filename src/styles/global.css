@@ -190,19 +190,24 @@ body::before {
 	background: var(--backdrop);
 }
 
-/* Very subtle scanline texture — dark theme only, kept far below
-   readability thresholds. */
+/* Very subtle scanline + grid texture — dark theme only, kept far
+   below readability thresholds. */
 :root.theme-dark body::after {
 	content: '';
 	position: fixed;
 	inset: 0;
 	z-index: -1;
 	pointer-events: none;
-	background: repeating-linear-gradient(
-		0deg,
-		rgba(148, 197, 255, 0.026) 0 1px,
-		transparent 1px 3px
-	);
+	background:
+		repeating-linear-gradient(0deg, rgba(148, 197, 255, 0.022) 0 1px, transparent 1px 3px),
+		linear-gradient(rgba(148, 197, 255, 0.028) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(148, 197, 255, 0.028) 1px, transparent 1px);
+	background-size:
+		auto,
+		44px 44px,
+		44px 44px;
+	-webkit-mask-image: radial-gradient(ellipse 120% 90% at 50% 0%, #000 40%, transparent 95%);
+	mask-image: radial-gradient(ellipse 120% 90% at 50% 0%, #000 40%, transparent 95%);
 }
 
 *,
@@ -394,6 +399,51 @@ h5 {
 }
 
 /* =========================================================
+   Interactive effects — glow tracking, scroll reveal
+   ========================================================= */
+
+/* Cursor-tracking glow wash on cards. JS sets --mx/--my. */
+.glow-card {
+	position: relative;
+}
+
+.glow-card::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	z-index: 1;
+	pointer-events: none;
+	opacity: 0;
+	transition: opacity 0.3s ease;
+	background: radial-gradient(
+		16rem 16rem at var(--mx, 50%) var(--my, 50%),
+		color-mix(in srgb, var(--accent) 9%, transparent),
+		transparent 65%
+	);
+}
+
+.glow-card:hover::after,
+.glow-card:focus-visible::after {
+	opacity: 1;
+}
+
+/* Scroll reveal — only armed once JS adds .js to <html>, so no-JS
+   visitors and reduced-motion users always see content. */
+.js [data-reveal] {
+	opacity: 0;
+	transform: translateY(14px);
+}
+
+.js [data-reveal].revealed {
+	opacity: 1;
+	transform: none;
+	transition:
+		opacity 0.6s ease,
+		transform 0.6s ease;
+	transition-delay: var(--reveal-delay, 0s);
+}
+
+/* =========================================================
    Keyframes — restrained, interactive/status elements only
    ========================================================= */
 
@@ -404,6 +454,91 @@ h5 {
 	}
 	50% {
 		box-shadow: 0 0 0 4px color-mix(in srgb, var(--success) 12%, transparent);
+	}
+}
+
+/* Slow drift for thin neon rules */
+@keyframes neonShift {
+	0% {
+		background-position: 0% 50%;
+	}
+	100% {
+		background-position: 100% 50%;
+	}
+}
+
+/* Occasional micro-flicker for HUD chrome — long period, shallow dip */
+@keyframes hudFlicker {
+	0%,
+	91%,
+	100% {
+		opacity: 1;
+	}
+	92% {
+		opacity: 0.55;
+	}
+	93% {
+		opacity: 1;
+	}
+	96% {
+		opacity: 0.75;
+	}
+	97% {
+		opacity: 1;
+	}
+}
+
+/* Terminal cursor blink */
+@keyframes blink {
+	0%,
+	100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0;
+	}
+}
+
+/* Console line print-in */
+@keyframes lineIn {
+	to {
+		opacity: 1;
+	}
+}
+
+/* Scan band sweep across a panel */
+@keyframes panelScan {
+	0%,
+	72% {
+		top: -30%;
+		opacity: 0;
+	}
+	76% {
+		opacity: 0.7;
+	}
+	96% {
+		top: 110%;
+		opacity: 0.7;
+	}
+	100% {
+		top: 110%;
+		opacity: 0;
+	}
+}
+
+/* Sheen sweep across a button */
+@keyframes sheen {
+	from {
+		transform: translateX(-130%) skewX(-18deg);
+	}
+	to {
+		transform: translateX(230%) skewX(-18deg);
+	}
+}
+
+@keyframes spin {
+	to {
+		transform: rotate(360deg);
 	}
 }
 
@@ -558,8 +693,10 @@ h5 {
 	*::before,
 	*::after {
 		animation-duration: 0.001ms !important;
+		animation-delay: 0s !important;
 		animation-iteration-count: 1 !important;
 		transition-duration: 0.001ms !important;
+		transition-delay: 0s !important;
 		scroll-behavior: auto !important;
 	}
 }

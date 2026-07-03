@@ -17,7 +17,7 @@ const date = post.data.publishDate.toLocaleDateString('en-US', {
 const minutes = readingTime(post.body);
 ---
 
-<a class:list={['blog-card', { featured }]} href={`/blog/${post.id}/`}>
+<a class:list={['blog-card', 'glow-card', { featured }]} href={`/blog/${post.id}/`}>
 	{
 		post.data.img && (
 			<div class="media">
@@ -81,8 +81,10 @@ const minutes = readingTime(post.body);
 		inset: 0 0 auto 0;
 		height: 2px;
 		background: var(--neon-rule);
+		background-size: 220% 100%;
 		opacity: 0.85;
 		z-index: 1;
+		animation: neonShift 6s ease-in-out infinite alternate;
 	}
 
 	.media {

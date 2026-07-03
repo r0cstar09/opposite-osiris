@@ -40,14 +40,16 @@ import Icon from './Icon.astro';
 		overflow: hidden;
 	}
 
-	/* Thin neon rule across the panel top */
+	/* Thin neon rule across the panel top, drifting slowly */
 	.panel::after {
 		content: '';
 		position: absolute;
 		inset: 0 0 auto 0;
 		height: 2px;
 		background: var(--neon-rule);
+		background-size: 220% 100%;
 		opacity: 0.85;
+		animation: neonShift 6s ease-in-out infinite alternate;
 	}
 
 	.panel::before {

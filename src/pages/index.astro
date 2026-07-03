@@ -31,7 +31,7 @@ const posts = (await getCollection('blog'))
 						<span class="dot" aria-hidden="true"></span>
 						status: open_to_new_opportunities
 					</p>
-					<h1 class="headline">Tony Muzo</h1>
+					<h1 class="headline" data-scramble>Tony Muzo</h1>
 					<p class="tagline">
 						I build security automation, threat intelligence reports, and cloud defense tooling —
 						turning attacker behavior into actionable defense.
@@ -50,7 +50,8 @@ const posts = (await getCollection('blog'))
 					</div>
 				</div>
 
-				<div class="profile-card">
+				<div class="profile-card glow-card">
+					<div class="pc-scan" aria-hidden="true"></div>
 					<div class="pc-hud" aria-hidden="true">
 						<span>// operator_profile</span>
 						<span class="pc-online"><i class="pc-dot"></i>online</span>
@@ -101,7 +102,7 @@ const posts = (await getCollection('blog'))
 				<Grid>
 					{
 						projects.map((project) => (
-							<li>
+							<li data-reveal>
 								<PortfolioPreview project={project} />
 							</li>
 						))
@@ -120,7 +121,11 @@ const posts = (await getCollection('blog'))
 				</header>
 
 				<div class="blog-preview-list">
-					{posts.map((post) => <BlogPostPreview post={post} />)}
+					{posts.map((post) => (
+						<div data-reveal>
+							<BlogPostPreview post={post} />
+						</div>
+					))}
 				</div>
 			</section>
 
@@ -136,7 +141,7 @@ const posts = (await getCollection('blog'))
 				<ul class="brand-row">
 					{
 						['GitHub', 'SANS Institute', 'Wazuh', 'Cisco Secure', 'OffSec', 'MITRE ATT&CK'].map(
-							(brand) => <li>{brand}</li>,
+							(brand) => <li data-reveal>{brand}</li>,
 						)
 					}
 				</ul>
@@ -213,6 +218,8 @@ const posts = (await getCollection('blog'))
 	}
 
 	.btn {
+		position: relative;
+		overflow: hidden;
 		display: inline-flex;
 		align-items: center;
 		gap: 0.55em;
@@ -247,6 +254,24 @@ const posts = (await getCollection('blog'))
 		box-shadow: var(--shadow-md), var(--glow-strong);
 	}
 
+	/* Sheen sweep across the primary button on hover */
+	.btn.primary::after {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 38%;
+		height: 100%;
+		pointer-events: none;
+		background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+		transform: translateX(-130%) skewX(-18deg);
+	}
+
+	.btn.primary:hover::after,
+	.btn.primary:focus-visible::after {
+		animation: sheen 0.8s ease;
+	}
+
 	.btn.secondary {
 		color: var(--text-strong);
 		background: var(--surface);
@@ -278,14 +303,33 @@ const posts = (await getCollection('blog'))
 		overflow: hidden;
 	}
 
-	/* Thin neon rule across the panel top */
+	/* Thin neon rule across the panel top, drifting slowly */
 	.profile-card::before {
 		content: '';
 		position: absolute;
 		inset: 0 0 auto 0;
 		height: 2px;
 		background: var(--neon-rule);
+		background-size: 220% 100%;
 		opacity: 0.85;
+		animation: neonShift 6s ease-in-out infinite alternate;
+	}
+
+	/* Occasional scan band sweeping down the panel */
+	.pc-scan {
+		position: absolute;
+		left: 0;
+		right: 0;
+		top: -30%;
+		height: 22%;
+		pointer-events: none;
+		background: linear-gradient(
+			180deg,
+			transparent,
+			color-mix(in srgb, var(--accent) 7%, transparent),
+			transparent
+		);
+		animation: panelScan 9s ease-in-out infinite;
 	}
 
 	.pc-hud {
@@ -304,6 +348,7 @@ const posts = (await getCollection('blog'))
 		align-items: center;
 		gap: 0.45rem;
 		color: var(--text-muted);
+		animation: hudFlicker 8s linear infinite;
 	}
 
 	.pc-dot {
@@ -482,6 +527,10 @@ const posts = (await getCollection('blog'))
 	.blog-preview-list {
 		display: grid;
 		gap: 1.25rem;
+	}
+
+	.blog-preview-list > div {
+		display: grid;
 	}
 
 	@media (min-width: 50em) {
