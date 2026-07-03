@@ -2,14 +2,16 @@
 interface Props {
 	title: string;
 	tagline?: string;
+	eyebrow?: string;
 	align?: 'start' | 'center';
 }
 
-const { align = 'center', tagline, title } = Astro.props;
+const { align = 'center', eyebrow, tagline, title } = Astro.props;
 ---
 
 <div class:list={['hero stack gap-4', align]}>
 	<div class="stack gap-2">
+		{eyebrow && <p class:list={[align === 'start' ? 'hud-label' : 'mono-label', 'eyebrow']}>{eyebrow}</p>}
 		<h1 class="title">{title}</h1>
 		{tagline && <p class="tagline">{tagline}</p>}
 	</div>
@@ -26,6 +28,11 @@ const { align = 'center', tagline, title } = Astro.props;
 	.tagline {
 		max-width: 40ch;
 		margin-inline: auto;
+	}
+
+	.eyebrow {
+		margin-bottom: 0.5rem;
+		justify-content: center;
 	}
 
 	.title {
@@ -49,6 +56,10 @@ const { align = 'center', tagline, title } = Astro.props;
 		.start .title,
 		.start .tagline {
 			margin-inline: unset;
+		}
+
+		.start .eyebrow {
+			justify-content: flex-start;
 		}
 
 		.title {

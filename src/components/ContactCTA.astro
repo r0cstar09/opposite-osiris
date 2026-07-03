@@ -6,6 +6,7 @@ import Icon from './Icon.astro';
 <aside class="wrapper">
 	<div class="panel">
 		<div class="copy stack gap-4">
+			<p class="mono-label">// establish_connection</p>
 			<h2>Interested in working together?</h2>
 			<p class="subtitle">
 				Available for security engineering, threat intelligence reporting, and automation tooling
@@ -32,11 +33,21 @@ import Icon from './Icon.astro';
 		gap: 2rem;
 		text-align: center;
 		padding: 3rem 1.5rem;
-		border: 1px solid var(--border);
-		border-radius: var(--radius-xl);
+		border: 1px solid var(--accent-border);
+		border-radius: var(--radius-lg);
 		background: var(--surface);
 		box-shadow: var(--shadow-sm);
 		overflow: hidden;
+	}
+
+	/* Thin neon rule across the panel top */
+	.panel::after {
+		content: '';
+		position: absolute;
+		inset: 0 0 auto 0;
+		height: 2px;
+		background: var(--neon-rule);
+		opacity: 0.85;
 	}
 
 	.panel::before {

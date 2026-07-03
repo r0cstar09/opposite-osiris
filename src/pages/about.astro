@@ -8,14 +8,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 	<div class="stack gap-20">
 		<main class="wrapper about">
 			<Hero
+				eyebrow="// operator_profile"
 				title="About"
 				tagline="Thanks for stopping by. Read below to learn more about myself and my background."
 			>
 				<div class="terminal" aria-hidden="true">
 					<div class="term-bar">
-						<span class="tb-dot"></span>
-						<span class="tb-dot"></span>
-						<span class="tb-dot"></span>
+						<span class="tb-dot red"></span>
+						<span class="tb-dot amber"></span>
+						<span class="tb-dot green"></span>
 						<span class="tb-title">whoami.sh</span>
 					</div>
 					<pre class="term-body"><span class="c">$</span> whoami
@@ -24,6 +25,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <span class="o">&gt; Cybersecurity Analyst · Threat Intelligence</span>
 <span class="c">$</span> experience --years
 <span class="o">&gt; 8+</span>
+<span class="c">$</span> certs --list
+<span class="o">&gt; GSEC · GCIH · GPYC · GFACT</span>
 <span class="c">$</span> location
 <span class="o">&gt; Toronto, CA</span>
 <span class="c">$</span> status
@@ -34,27 +37,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 			<h2 class="section-title">Background</h2>
 			<div class="content">
 				<p>
-					I am a cybersecurity professional with 8+ years of experience across Threat Intelligence, Incident Response, and Security Operations.
-					I progressed from SOC analyst roles into leading investigations, producing ransomware-focused threat intelligence, and developing actionable
-					detection opportunities for blue teams.
-				</p>
-				<p>
-					My work focuses on profiling threat actors, analyzing TTPs, and translating complex technical behaviors into intelligence products that
-					support SOC, IR, and executive decision-making. I specialize in ransomware ecosystem analysis, MITRE ATT&CK mapping, and producing
-					intelligence deliverables enriched with IOCs, behavioral signatures, and defensive recommendations.
-				</p>
-				<p>
-					Across roles at One Arrow Consulting, the City of St. John’s, Cisco Security, and Symantec, I have supported organizations through
-					investigations of malware outbreaks, credential compromises, phishing campaigns, and high‑volume alert environments. My work integrates
-					operational vigilance with strategic intelligence to strengthen overall defensive posture.
+					Cybersecurity analyst with 8+ years across threat intelligence, incident response, and
+					security operations. I specialize in ransomware ecosystem analysis and MITRE ATT&CK
+					mapping — turning attacker behavior into intelligence that SOC, IR, and leadership teams
+					can act on. Previous roles include Cisco Security, Symantec, One Arrow Consulting, and
+					the City of St. John’s.
 				</p>
 			</div>
 			<h2 class="section-title">Education</h2>
 			<div class="content">
 				<p>
-					I have completed multiple technical and communication-focused programs through SANS Institute, AWS training pathways,
-					and cybersecurity writing and speaking courses. I continue to pursue advanced security engineering and intelligence education
-					to refine my investigative and reporting capabilities.
+					Ongoing training through SANS Institute, AWS security pathways, and technical
+					communication programs.
 				</p>
 			</div>
 			<h2 class="section-title">Skills</h2>
@@ -84,6 +78,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 					<li>
 						<a href="https://www.credly.com/earner/earned/badge/628f4b85-445f-45d2-8898-c0000c547416" target="_blank" rel="noopener">
 							GCIH – GIAC Certified Incident Handler
+						</a>
+					</li>
+					<li>
+						<a href="https://www.credly.com/earner/earned/badge/50af4086-4502-4519-a94b-b7cbfc11fef4" target="_blank" rel="noopener">
+							GPYC – GIAC Python Coder
 						</a>
 					</li>
 					<li>
@@ -139,6 +138,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 		height: 0.6rem;
 		border-radius: 999rem;
 		background: #3a4a68;
+	}
+
+	.tb-dot.red {
+		background: #b4485c;
+	}
+	.tb-dot.amber {
+		background: #b8934a;
+	}
+	.tb-dot.green {
+		background: #3d9e78;
 	}
 
 	.tb-title {
@@ -238,6 +247,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 		display: block;
 		padding: 0.85rem 1.1rem;
 		border: 1px solid var(--border);
+		border-left: 2px solid var(--accent-border);
 		border-radius: var(--radius-sm);
 		background: var(--surface);
 		color: var(--text-strong);
@@ -253,8 +263,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 	.cert-list a:hover,
 	.cert-list a:focus {
 		border-color: var(--accent-border);
+		border-left-color: var(--accent);
 		color: var(--accent);
-		box-shadow: var(--shadow-sm);
+		box-shadow: var(--shadow-sm), var(--glow-accent);
 	}
 
 	@media (min-width: 50em) {

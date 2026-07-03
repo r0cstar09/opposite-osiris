@@ -1,19 +1,19 @@
 /* =========================================================
-   DESIGN SYSTEM — professional editorial theme
-   Dark-first with a true light reading mode. One restrained
-   accent, high-contrast type, no decorative noise.
-   Legacy token names are aliased so nothing breaks.
+   DESIGN SYSTEM — operator console theme
+   Restrained cyberpunk layer on a readable editorial base.
+   Dark graphite surfaces, thin neon borders, mono micro-labels,
+   soft glow on interactive elements only. Body copy stays calm.
    ========================================================= */
 
 :root {
 	/* ---- Light theme (default when .theme-dark is absent) ---- */
 	color-scheme: light;
 
-	--bg: #f6f8fb;
+	--bg: #f5f7fa;
 	--surface: #ffffff;
-	--surface-2: #eef2f7;
-	--border: #e2e8f0;
-	--border-strong: #cbd5e1;
+	--surface-2: #edf1f7;
+	--border: #dfe6ef;
+	--border-strong: #c6d1e0;
 
 	--text-strong: #0c1626;
 	--text: #35435c;
@@ -22,22 +22,31 @@
 	--accent: #0369a1;
 	--accent-strong: #075985;
 	--accent-subtle: rgba(3, 105, 161, 0.08);
-	--accent-border: rgba(3, 105, 161, 0.28);
+	--accent-border: rgba(3, 105, 161, 0.3);
 	--accent-text-over: #ffffff;
+	--violet: #6d28d9;
+	--violet-subtle: rgba(109, 40, 217, 0.08);
+	--violet-border: rgba(109, 40, 217, 0.3);
+	--alert: #dc2626;
+	--alert-subtle: rgba(220, 38, 38, 0.08);
+	--alert-border: rgba(220, 38, 38, 0.3);
 	--success: #047857;
+
+	--glow-accent: 0 0 14px rgba(3, 105, 161, 0.18);
+	--glow-strong: 0 0 20px rgba(3, 105, 161, 0.28);
 
 	--backdrop:
 		radial-gradient(60rem 30rem at 85% -12%, rgba(14, 165, 233, 0.07), transparent 60%),
-		radial-gradient(48rem 26rem at -5% 10%, rgba(99, 102, 241, 0.05), transparent 60%);
+		radial-gradient(48rem 26rem at -5% 10%, rgba(109, 40, 217, 0.05), transparent 60%);
 
 	--shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
 	--shadow-md: 0 4px 16px rgba(15, 23, 42, 0.08);
 	--shadow-lg: 0 18px 44px rgba(15, 23, 42, 0.12);
 
-	/* Duotone gradient used by decorative icons */
+	/* Duotone gradient used by decorative icons + neon rules */
 	--gradient-stop-1: #0369a1;
 	--gradient-stop-2: #2563eb;
-	--gradient-stop-3: #4f46e5;
+	--gradient-stop-3: #6d28d9;
 
 	/* ---- Legacy aliases (keep old component tokens working) ---- */
 	--gray-0: var(--text-strong);
@@ -66,6 +75,14 @@
 	--gradient-accent-orange: linear-gradient(135deg, var(--gradient-stop-1), var(--gradient-stop-3));
 	--gradient-stroke: var(--border);
 
+	/* Thin neon rule for key panels */
+	--neon-rule: linear-gradient(
+		90deg,
+		var(--gradient-stop-1),
+		var(--gradient-stop-2) 55%,
+		var(--gradient-stop-3)
+	);
+
 	/* ---- Type scale ---- */
 	--text-sm: 0.875rem;
 	--text-base: 1rem;
@@ -82,51 +99,60 @@
 		system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
 		'Open Sans', 'Helvetica Neue', sans-serif;
 	--font-body: 'Inter', var(--font-system);
-	--font-brand: 'Space Grotesk', var(--font-system);
+	--font-brand: 'Chakra Petch', var(--font-system);
 	--font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
-	--radius-sm: 0.5rem;
-	--radius-md: 0.75rem;
-	--radius-lg: 1rem;
-	--radius-xl: 1.25rem;
+	--radius-sm: 0.375rem;
+	--radius-md: 0.625rem;
+	--radius-lg: 0.875rem;
+	--radius-xl: 1rem;
 
 	--theme-transition: 0.2s ease-in-out;
 }
 
-/* ---- Dark theme ---- */
+/* ---- Dark theme: graphite operator console ---- */
 :root.theme-dark {
 	color-scheme: dark;
 
-	--bg: #070b13;
-	--surface: #0d1424;
-	--surface-2: #131c30;
-	--border: #1d283e;
-	--border-strong: #2b3852;
+	--bg: #04060b;
+	--surface: #0a101d;
+	--surface-2: #101a2e;
+	--border: #1a2740;
+	--border-strong: #2a3c60;
 
 	--text-strong: #f1f5fb;
 	--text: #c4cfe1;
 	--text-muted: #8a99b4;
 
-	--accent: #4cc3f7;
-	--accent-strong: #86d9fb;
-	--accent-subtle: rgba(76, 195, 247, 0.1);
-	--accent-border: rgba(76, 195, 247, 0.32);
-	--accent-text-over: #06131f;
-	--success: #34d399;
+	--accent: #41d8ff;
+	--accent-strong: #8ae7ff;
+	--accent-subtle: rgba(65, 216, 255, 0.09);
+	--accent-border: rgba(65, 216, 255, 0.3);
+	--accent-text-over: #041018;
+	--violet: #a495ff;
+	--violet-subtle: rgba(164, 149, 255, 0.1);
+	--violet-border: rgba(164, 149, 255, 0.32);
+	--alert: #ff5470;
+	--alert-subtle: rgba(255, 84, 112, 0.1);
+	--alert-border: rgba(255, 84, 112, 0.32);
+	--success: #2fe6a7;
+
+	--glow-accent: 0 0 16px rgba(65, 216, 255, 0.2);
+	--glow-strong: 0 0 24px rgba(65, 216, 255, 0.32);
 
 	--backdrop:
-		radial-gradient(60rem 30rem at 85% -12%, rgba(56, 189, 248, 0.08), transparent 60%),
-		radial-gradient(48rem 26rem at -5% 10%, rgba(99, 102, 241, 0.06), transparent 60%);
+		radial-gradient(60rem 30rem at 85% -12%, rgba(65, 216, 255, 0.07), transparent 60%),
+		radial-gradient(48rem 26rem at -5% 10%, rgba(139, 124, 248, 0.06), transparent 60%);
 
-	--shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
-	--shadow-md: 0 6px 20px rgba(0, 0, 0, 0.35);
-	--shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.5);
+	--shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+	--shadow-md: 0 6px 20px rgba(0, 0, 0, 0.4);
+	--shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.55);
 
-	--gradient-stop-1: #4cc3f7;
-	--gradient-stop-2: #60a5fa;
-	--gradient-stop-3: #818cf8;
+	--gradient-stop-1: #41d8ff;
+	--gradient-stop-2: #5aa7ff;
+	--gradient-stop-3: #a495ff;
 
-	--gray-999_40: rgba(7, 11, 19, 0.4);
+	--gray-999_40: rgba(4, 6, 11, 0.4);
 	--gradient-subtle: var(--surface);
 }
 
@@ -154,14 +180,29 @@ body {
 		color var(--theme-transition);
 }
 
-/* Single, quiet ambient backdrop — no grids, no scanlines. */
+/* Quiet ambient backdrop. */
 body::before {
+	content: '';
+	position: fixed;
+	inset: 0;
+	z-index: -2;
+	pointer-events: none;
+	background: var(--backdrop);
+}
+
+/* Very subtle scanline texture — dark theme only, kept far below
+   readability thresholds. */
+:root.theme-dark body::after {
 	content: '';
 	position: fixed;
 	inset: 0;
 	z-index: -1;
 	pointer-events: none;
-	background: var(--backdrop);
+	background: repeating-linear-gradient(
+		0deg,
+		rgba(148, 197, 255, 0.026) 0 1px,
+		transparent 1px 3px
+	);
 }
 
 *,
@@ -195,14 +236,14 @@ h5 {
 	line-height: 1.15;
 	font-family: var(--font-brand);
 	font-weight: 600;
-	letter-spacing: -0.015em;
+	letter-spacing: 0;
 	color: var(--text-strong);
 	text-wrap: balance;
 }
 
 h1 {
 	font-size: var(--text-4xl);
-	letter-spacing: -0.025em;
+	letter-spacing: -0.01em;
 }
 
 h2 {
@@ -265,14 +306,35 @@ h5 {
 	flex-direction: column;
 }
 
-/* Small mono eyebrow label */
+/* HUD-style mono eyebrow label */
 .mono-label {
 	font-family: var(--font-mono);
 	font-size: 0.75rem;
 	font-weight: 500;
-	letter-spacing: 0.14em;
+	letter-spacing: 0.16em;
 	text-transform: uppercase;
 	color: var(--accent);
+}
+
+/* Eyebrow with a thin rule trailing off to the right */
+.hud-label {
+	display: flex;
+	align-items: center;
+	gap: 0.85rem;
+	font-family: var(--font-mono);
+	font-size: 0.75rem;
+	font-weight: 500;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	color: var(--accent);
+	white-space: nowrap;
+}
+
+.hud-label::after {
+	content: '';
+	height: 1px;
+	width: 4.5rem;
+	background: linear-gradient(90deg, var(--accent-border), transparent);
 }
 
 .neon-text {
@@ -328,6 +390,20 @@ h5 {
 	}
 	.lg\:gap-48 {
 		gap: 12rem;
+	}
+}
+
+/* =========================================================
+   Keyframes — restrained, interactive/status elements only
+   ========================================================= */
+
+@keyframes statusPulse {
+	0%,
+	100% {
+		box-shadow: 0 0 0 0 color-mix(in srgb, var(--success) 35%, transparent);
+	}
+	50% {
+		box-shadow: 0 0 0 4px color-mix(in srgb, var(--success) 12%, transparent);
 	}
 }
 
@@ -408,7 +484,7 @@ h5 {
 	padding: 1.25rem;
 	border: 1px solid var(--border);
 	border-radius: var(--radius-md);
-	background: #0d1424;
+	background: #0a101d;
 	line-height: 1.65;
 }
 
@@ -444,11 +520,11 @@ h5 {
 }
 
 .prose th {
-	font-family: var(--font-body);
+	font-family: var(--font-mono);
 	font-weight: 600;
-	font-size: 0.8125rem;
+	font-size: 0.75rem;
 	text-transform: uppercase;
-	letter-spacing: 0.05em;
+	letter-spacing: 0.07em;
 	color: var(--text-strong);
 	background: var(--surface-2);
 }
@@ -489,7 +565,8 @@ h5 {
 }
 
 @media (forced-colors: active) {
-	body::before {
+	body::before,
+	body::after {
 		display: none;
 	}
 }

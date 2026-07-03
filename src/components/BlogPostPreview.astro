@@ -47,6 +47,7 @@ const minutes = readingTime(post.body);
 
 <style>
 	.blog-card {
+		position: relative;
 		display: flex;
 		flex-direction: column;
 		height: 100%;
@@ -65,8 +66,23 @@ const minutes = readingTime(post.body);
 	.blog-card:hover,
 	.blog-card:focus-visible {
 		border-color: var(--accent-border);
-		box-shadow: var(--shadow-md);
+		box-shadow: var(--shadow-md), var(--glow-accent);
 		transform: translateY(-4px);
+	}
+
+	/* Featured intel item gets the thin neon rule */
+	.blog-card.featured {
+		border-color: var(--accent-border);
+	}
+
+	.blog-card.featured::before {
+		content: '';
+		position: absolute;
+		inset: 0 0 auto 0;
+		height: 2px;
+		background: var(--neon-rule);
+		opacity: 0.85;
+		z-index: 1;
 	}
 
 	.media {
@@ -101,8 +117,11 @@ const minutes = readingTime(post.body);
 		flex-wrap: wrap;
 		align-items: center;
 		gap: 0.5rem;
-		font-size: 0.8125rem;
+		font-family: var(--font-mono);
+		font-size: 0.7rem;
 		font-weight: 500;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
 		color: var(--text-muted);
 	}
 
@@ -140,9 +159,11 @@ const minutes = readingTime(post.body);
 	.tags li {
 		padding: 0.2rem 0.6rem;
 		border: 1px solid var(--border);
-		border-radius: 999rem;
-		font-size: 0.75rem;
+		border-radius: var(--radius-sm);
+		font-family: var(--font-mono);
+		font-size: 0.68rem;
 		font-weight: 500;
+		letter-spacing: 0.05em;
 		color: var(--text-muted);
 		background: var(--surface-2);
 	}
@@ -153,8 +174,11 @@ const minutes = readingTime(post.body);
 		display: inline-flex;
 		align-items: center;
 		gap: 0.4rem;
-		font-size: var(--text-sm);
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
 		font-weight: 600;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
 		color: var(--accent);
 	}
 

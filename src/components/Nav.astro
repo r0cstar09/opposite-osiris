@@ -175,10 +175,11 @@ const isCurrentPage = (href: string) => {
 		place-items: center;
 		width: 2rem;
 		height: 2rem;
-		border-radius: 0.55rem;
+		border-radius: var(--radius-sm);
 		color: var(--accent);
 		background: var(--accent-subtle);
 		border: 1px solid var(--accent-border);
+		box-shadow: var(--glow-accent);
 	}
 
 	.menu-button {
@@ -226,10 +227,13 @@ const isCurrentPage = (href: string) => {
 		display: inline-block;
 		color: var(--text-muted);
 		text-decoration: none;
+		font-family: var(--font-mono);
 		font-weight: 500;
-		font-size: 0.9375rem;
-		padding: 0.5rem 0.85rem;
-		border-radius: 0.5rem;
+		font-size: 0.8125rem;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		padding: 0.55rem 0.85rem;
+		border-radius: var(--radius-sm);
 		transition:
 			color var(--theme-transition),
 			background-color var(--theme-transition);
@@ -321,7 +325,7 @@ const isCurrentPage = (href: string) => {
 		.link {
 			padding: 0.45rem 0.95rem;
 			border-radius: 999rem;
-			font-size: 0.875rem;
+			font-size: 0.75rem;
 		}
 
 		.menu-footer {

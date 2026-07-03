@@ -88,8 +88,11 @@ const minutes = readingTime(entry.body);
 		width: fit-content;
 		align-items: center;
 		gap: 0.5rem;
-		font-size: var(--text-sm);
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
 		font-weight: 600;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
 		color: var(--accent);
 		text-decoration: none;
 	}
@@ -104,8 +107,11 @@ const minutes = readingTime(entry.body);
 		flex-wrap: wrap;
 		align-items: center;
 		gap: 0.5rem 0.65rem;
-		font-size: var(--text-sm);
+		font-family: var(--font-mono);
+		font-size: 0.75rem;
 		font-weight: 500;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
 		color: var(--text-muted);
 	}
 
@@ -138,9 +144,11 @@ const minutes = readingTime(entry.body);
 	.tags li {
 		padding: 0.2rem 0.65rem;
 		border: 1px solid var(--border);
-		border-radius: 999rem;
-		font-size: 0.75rem;
+		border-radius: var(--radius-sm);
+		font-family: var(--font-mono);
+		font-size: 0.68rem;
 		font-weight: 500;
+		letter-spacing: 0.05em;
 		color: var(--text-muted);
 		background: var(--surface-2);
 	}

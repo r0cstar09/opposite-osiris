@@ -4,7 +4,7 @@ import Icon from './Icon.astro';
 
 <section class="skills">
 	<div class="skill">
-		<span class="icon-chip"><Icon icon="book-open" size="1.4rem" /></span>
+		<span class="icon-chip cyan"><Icon icon="book-open" size="1.4rem" /></span>
 		<h2>Threat Intelligence</h2>
 		<p>
 			Profiling ransomware groups, mapping adversary TTPs to MITRE ATT&CK, and producing
@@ -12,7 +12,7 @@ import Icon from './Icon.astro';
 		</p>
 	</div>
 	<div class="skill">
-		<span class="icon-chip"><Icon icon="code" size="1.4rem" /></span>
+		<span class="icon-chip violet"><Icon icon="code" size="1.4rem" /></span>
 		<h2>Security Automation</h2>
 		<p>
 			Building tooling and pipelines that eliminate manual workload, accelerate investigations, and
@@ -20,7 +20,7 @@ import Icon from './Icon.astro';
 		</p>
 	</div>
 	<div class="skill">
-		<span class="icon-chip"><Icon icon="shield" size="1.4rem" /></span>
+		<span class="icon-chip red"><Icon icon="shield" size="1.4rem" /></span>
 		<h2>Detection & Incident Response</h2>
 		<p>
 			Developing detections, coordinating incident response workflows, and translating complex
@@ -37,6 +37,7 @@ import Icon from './Icon.astro';
 	}
 
 	.skill {
+		position: relative;
 		display: flex;
 		flex-direction: column;
 		gap: 0.75rem;
@@ -45,16 +46,32 @@ import Icon from './Icon.astro';
 		border-radius: var(--radius-lg);
 		background: var(--surface);
 		box-shadow: var(--shadow-sm);
+		overflow: hidden;
 		transition:
 			border-color var(--theme-transition),
 			box-shadow var(--theme-transition),
 			transform var(--theme-transition);
 	}
 
+	/* Thin accent rule along the top of each panel */
+	.skill::before {
+		content: '';
+		position: absolute;
+		inset: 0 0 auto 0;
+		height: 2px;
+		background: var(--chip-color, var(--accent));
+		opacity: 0.55;
+		transition: opacity var(--theme-transition);
+	}
+
 	.skill:hover {
 		transform: translateY(-3px);
-		border-color: var(--accent-border);
+		border-color: color-mix(in srgb, var(--chip-color, var(--accent)) 35%, transparent);
 		box-shadow: var(--shadow-md);
+	}
+
+	.skill:hover::before {
+		opacity: 1;
 	}
 
 	.icon-chip {
@@ -62,10 +79,28 @@ import Icon from './Icon.astro';
 		place-items: center;
 		width: 2.75rem;
 		height: 2.75rem;
-		border-radius: 0.75rem;
-		color: var(--accent);
-		background: var(--accent-subtle);
-		border: 1px solid var(--accent-border);
+		border-radius: var(--radius-sm);
+		color: var(--chip-color, var(--accent));
+		background: var(--chip-bg, var(--accent-subtle));
+		border: 1px solid var(--chip-border, var(--accent-border));
+	}
+
+	.skill:has(.icon-chip.cyan) {
+		--chip-color: var(--accent);
+		--chip-bg: var(--accent-subtle);
+		--chip-border: var(--accent-border);
+	}
+
+	.skill:has(.icon-chip.violet) {
+		--chip-color: var(--violet);
+		--chip-bg: var(--violet-subtle);
+		--chip-border: var(--violet-border);
+	}
+
+	.skill:has(.icon-chip.red) {
+		--chip-color: var(--alert);
+		--chip-bg: var(--alert-subtle);
+		--chip-border: var(--alert-border);
 	}
 
 	.skill h2 {

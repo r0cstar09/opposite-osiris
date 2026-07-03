@@ -1,5 +1,6 @@
 ---
 const currentYear = new Date().getFullYear();
+const lastSync = new Date().toISOString().slice(0, 10);
 ---
 
 <footer>
@@ -7,6 +8,9 @@ const currentYear = new Date().getFullYear();
 		<p>Designed & developed in Toronto.</p>
 		<p>&copy; {currentYear} Tony Muzo</p>
 	</div>
+	<p class="sysline" aria-hidden="true">
+		<span class="ok">●</span> sys.status: nominal · last_sync: {lastSync}
+	</p>
 	<p class="socials">
 		<a href="https://github.com/r0cstar09">GitHub</a>
 		<a href="https://www.linkedin.com/in/anthony-muzonzini-20702/">LinkedIn</a>
@@ -17,7 +21,7 @@ const currentYear = new Date().getFullYear();
 	footer {
 		display: flex;
 		flex-direction: column;
-		gap: 1.5rem;
+		gap: 1.25rem;
 		margin-top: auto;
 		padding: 2.5rem 2rem;
 		text-align: center;
@@ -43,6 +47,18 @@ const currentYear = new Date().getFullYear();
 		gap: 0.5rem;
 	}
 
+	.sysline {
+		font-family: var(--font-mono);
+		font-size: 0.7rem;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--text-muted);
+	}
+
+	.sysline .ok {
+		color: var(--success);
+	}
+
 	.socials {
 		display: flex;
 		justify-content: center;
@@ -53,6 +69,7 @@ const currentYear = new Date().getFullYear();
 	@media (min-width: 50em) {
 		footer {
 			flex-direction: row;
+			align-items: center;
 			justify-content: space-between;
 			padding: 2.5rem 5rem;
 		}
