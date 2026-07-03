@@ -44,8 +44,4 @@ This is less about panic and more about verification. If nobody owns the app, no
 
 ---
 
-*Generated from Hermes Relay's daily cyber briefing and edited through Tony's practitioner voice profile before publishing to this blog.*
-
 Source: [Order-tracking app Shop abused to push callback phishing attacks](https://www.bleepingcomputer.com/news/security/order-tracking-app-shop-abused-to-push-callback-phishing-attacks/)
-
-Pipeline note: lens: Supply chain and third-party risk; draft model: projects/project-a89720ac-d6be-45fe-a4b/locations/us-central1/publishers/google/models/gemini-2.5-flash.

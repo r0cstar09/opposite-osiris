@@ -37,8 +37,4 @@ The useful signal now is whether this becomes repeatable attacker tradecraft, a 
 
 ---
 
-*Generated from Hermes Relay's daily cyber briefing and edited through Tony's practitioner voice profile before publishing to this blog.*
-
 Source: [A Record-Breaking Patch Tuesday for June 2026](https://krebsonsecurity.com/2026/06/a-record-breaking-patch-tuesday-for-june-2026/)
-
-Pipeline note: lens: One concrete detection or mitigation step; draft model: projects/project-a89720ac-d6be-45fe-a4b/locations/us-central1/publishers/google/models/gemini-2.5-flash.

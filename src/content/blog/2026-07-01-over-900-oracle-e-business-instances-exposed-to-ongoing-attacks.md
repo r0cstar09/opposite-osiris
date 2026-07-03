@@ -38,8 +38,4 @@ Can you prove where your EBS instances are? Can you prove they aren't exposed? I
 
 ---
 
-*Generated from Hermes Relay's daily cyber briefing and edited through Tony's practitioner voice profile before publishing to this blog.*
-
 Source: [Over 900 Oracle E-Business instances exposed to ongoing attacks](https://www.bleepingcomputer.com/news/security/over-900-oracle-e-business-instances-exposed-to-ongoing-attacks/)
-
-Pipeline note: lens: What I would do next; draft model: projects/project-a89720ac-d6be-45fe-a4b/locations/us-central1/publishers/google/models/gemini-2.5-flash.

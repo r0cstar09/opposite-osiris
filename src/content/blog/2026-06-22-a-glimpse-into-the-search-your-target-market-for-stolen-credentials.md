@@ -45,6 +45,4 @@ The signal to watch isn't in the threat feeds. It's in the answer to the questio
 
 ---
 
-*Generated from Hermes Relay's daily cyber briefing and edited through Tony's practitioner voice profile before publishing to this blog.*
-
 Source: [A Glimpse into the “Search Your Target” Market for Stolen Credentials](https://www.bleepingcomputer.com/news/security/a-glimpse-into-the-search-your-target-market-for-stolen-credentials/)

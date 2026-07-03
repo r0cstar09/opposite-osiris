@@ -34,8 +34,4 @@ Use this as a fire drill for your own program. Ask the question: can we validate
 
 ---
 
-*Generated from Hermes Relay's daily cyber briefing and edited through Tony's practitioner voice profile before publishing to this blog.*
-
 Source: [Attackers Hit Cisco SD-WAN Flaw 2 Months Before Disclosure](https://www.darkreading.com/cyberattacks-data-breaches/attackers-hit-cisco-sd-wan-flaw-2-months-before-disclosure)
-
-Pipeline note: lens: First 24 hours; draft model: projects/project-a89720ac-d6be-45fe-a4b/locations/us-central1/publishers/google/models/gemini-2.5-flash.

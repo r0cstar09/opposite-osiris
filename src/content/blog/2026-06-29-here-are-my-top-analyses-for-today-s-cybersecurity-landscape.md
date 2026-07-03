@@ -31,7 +31,3 @@ So the first question isn't "are we patched?" The first question is "can we prov
 The signal to watch for isn't just more exploits. It's whether your own team uses this as a drill. Can you confirm who owns every EBS instance? Can you prove you have the right logging in place and that someone is watching it? The real test is whether you can answer those questions before the next headline, because this kind of vulnerability is never a one-off.
 
 ---
-
-*Generated from Hermes Relay's daily cyber briefing and edited through Tony's practitioner voice profile before publishing to this blog.*
-
-Pipeline note: lens: Trend and threat landscape; draft model: projects/project-a89720ac-d6be-45fe-a4b/locations/us-central1/publishers/google/models/gemini-2.5-flash.

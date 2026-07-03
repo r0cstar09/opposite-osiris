@@ -37,7 +37,3 @@ The signal to watch isn't how many more credentials leak. The signal is whether 
 If the conversation stays at the level of password resets, the lesson has been missed. If it forces a real conversation about device ownership and integrity monitoring, then it's a useful wake-up call.
 
 ---
-
-*Generated from Hermes Relay's daily cyber briefing and edited through Tony's practitioner voice profile before publishing to this blog.*
-
-Pipeline note: lens: What I would do next; draft model: projects/project-a89720ac-d6be-45fe-a4b/locations/us-central1/publishers/google/models/gemini-2.5-flash.

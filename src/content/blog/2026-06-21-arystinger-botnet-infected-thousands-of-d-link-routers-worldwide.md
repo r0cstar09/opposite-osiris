@@ -42,7 +42,3 @@ Use this story as a prompt. Ask your network and security teams:
 This is less about panic and more about verification. The next useful signal isn't in a threat feed; it's in the answer you get when you ask those questions.
 
 ---
-
-*Generated from Hermes Relay's daily cyber briefing and edited through Tony's practitioner voice profile before publishing to this blog.*
-
-Pipeline note: lens: Trend and threat landscape; draft model: projects/project-a89720ac-d6be-45fe-a4b/locations/us-central1/publishers/google/models/gemini-2.5-flash.
