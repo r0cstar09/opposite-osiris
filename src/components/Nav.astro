@@ -30,7 +30,7 @@ const isCurrentPage = (href: string) => {
 <nav>
 	<div class="menu-header">
 		<a href="/" class="site-title">
-			<span class="mark"><Icon icon="terminal-window" size="1.15em" /></span>
+			<img class="mark" src="/brand/logo-mark.svg" alt="" width="30" height="30" />
 			Tony Muzo
 		</a>
 		<menu-button>
@@ -171,15 +171,10 @@ const isCurrentPage = (href: string) => {
 	}
 
 	.mark {
-		display: grid;
-		place-items: center;
-		width: 2rem;
-		height: 2rem;
-		border-radius: var(--radius-sm);
-		color: var(--accent);
-		background: var(--accent-subtle);
-		border: 1px solid var(--accent-border);
-		box-shadow: var(--glow-accent);
+		width: 1.9rem;
+		height: 1.9rem;
+		flex-shrink: 0;
+		filter: drop-shadow(0 0 5px color-mix(in srgb, var(--accent) 30%, transparent));
 		animation: hudFlicker 11s linear infinite;
 	}
 

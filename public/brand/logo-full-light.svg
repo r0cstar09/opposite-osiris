@@ -1,0 +1,44 @@
+<svg width="760" height="220" viewBox="0 0 760 220" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Tony Muzo — Security &amp; Threat Intelligence">
+	<defs>
+		<linearGradient id="llEdge" x1="24" y1="38" x2="232" y2="218" gradientUnits="userSpaceOnUse">
+			<stop stop-color="#0ea5e9"/>
+			<stop offset="0.5" stop-color="#2563eb"/>
+			<stop offset="1" stop-color="#6d28d9"/>
+		</linearGradient>
+		<linearGradient id="llFill" x1="76" y1="38" x2="180" y2="218" gradientUnits="userSpaceOnUse">
+			<stop stop-color="#0d1626"/>
+			<stop offset="1" stop-color="#04060b"/>
+		</linearGradient>
+		<linearGradient id="llChevron" x1="80" y1="92" x2="124" y2="164" gradientUnits="userSpaceOnUse">
+			<stop stop-color="#5ad0ff"/>
+			<stop offset="1" stop-color="#0ea5e9"/>
+		</linearGradient>
+		<linearGradient id="llWord" x1="470" y1="70" x2="720" y2="140" gradientUnits="userSpaceOnUse">
+			<stop stop-color="#0369a1"/>
+			<stop offset="1" stop-color="#6d28d9"/>
+		</linearGradient>
+	</defs>
+
+	<!-- Mark -->
+	<g transform="translate(6,-18) scale(0.8)">
+		<path d="M232 128 L180 218 L76 218 L24 128 L76 38 L180 38 Z"
+			fill="url(#llFill)" stroke="url(#llEdge)" stroke-width="6" stroke-linejoin="round"/>
+		<path d="M215 128 L172 202 L84 202 L41 128 L84 54 L172 54 Z"
+			fill="none" stroke="#41d8ff" stroke-width="1.5" opacity="0.16"/>
+		<path d="M80 92 L124 128 L80 164" fill="none" stroke="url(#llChevron)"
+			stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+		<rect x="136" y="148" width="42" height="17" rx="5" fill="#a495ff"/>
+		<circle cx="232" cy="128" r="5" fill="#0ea5e9"/>
+		<circle cx="24" cy="128" r="5" fill="#0ea5e9"/>
+	</g>
+
+	<!-- Wordmark -->
+	<text x="222" y="112" font-family="'Chakra Petch', system-ui, sans-serif"
+		font-weight="700" font-size="66" letter-spacing="1">
+		<tspan fill="#0c1626">TONY</tspan><tspan dx="20" fill="url(#llWord)">MUZO</tspan>
+	</text>
+	<text x="224" y="152" font-family="'JetBrains Mono', ui-monospace, monospace"
+		font-weight="500" font-size="18" letter-spacing="4" fill="#5f6d87">
+		// SECURITY · THREAT INTELLIGENCE
+	</text>
+</svg>
