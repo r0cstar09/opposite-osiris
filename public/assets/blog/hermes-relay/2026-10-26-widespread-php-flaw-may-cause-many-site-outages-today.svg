@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="hero-title hero-desc">
-  <title id="hero-title">Widespread PHP Flaw May Cause Many Site Outages Today</title>
+  <title id="hero-title">PHP2Shell: AI-assisted discovery is only half the security story</title>
   <desc id="hero-desc">Editorial cyber defense illustration with a protected network edge and telemetry paths.</desc>
   <defs>
     <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
@@ -7,13 +7,13 @@
       <stop offset="1" stop-color="#111827" />
     </linearGradient>
     <linearGradient id="signal" x1="0" y1="0" x2="1" y2="0">
-      <stop offset="0" stop-color="hsl(197 74% 48%)" stop-opacity="0.15" />
-      <stop offset="0.68" stop-color="hsl(197 82% 58%)" />
+      <stop offset="0" stop-color="hsl(174 74% 48%)" stop-opacity="0.15" />
+      <stop offset="0.68" stop-color="hsl(174 82% 58%)" />
       <stop offset="1" stop-color="hsl(46 90% 58%)" />
     </linearGradient>
     <radialGradient id="glow">
-      <stop offset="0" stop-color="hsl(197 82% 58%)" stop-opacity="0.24" />
-      <stop offset="1" stop-color="hsl(197 82% 58%)" stop-opacity="0" />
+      <stop offset="0" stop-color="hsl(174 82% 58%)" stop-opacity="0.24" />
+      <stop offset="1" stop-color="hsl(174 82% 58%)" stop-opacity="0" />
     </radialGradient>
   </defs>
   <rect width="1600" height="900" fill="url(#background)" />
@@ -24,10 +24,10 @@
     <path d="M170 0 V235 L390 455 V900" />
   </g>
   <path d="M80 590 C350 590 385 300 650 390 S1060 700 1510 270" fill="none" stroke="url(#signal)" stroke-width="8" stroke-linecap="round" />
-  <g transform="translate(690 205)" fill="#0b1728" stroke="hsl(197 82% 58%)" stroke-width="7">
+  <g transform="translate(690 205)" fill="#0b1728" stroke="hsl(174 82% 58%)" stroke-width="7">
     <path d="M110 0 L220 42 V150 C220 247 163 310 110 338 C57 310 0 247 0 150 V42 Z" />
     <path d="M67 164 L98 195 L158 125" fill="none" stroke-linecap="round" stroke-linejoin="round" />
   </g>
-  <g fill="hsl(197 82% 58%)" opacity="0.9"><circle cx="1220" cy="288" r="8" /><circle cx="1291" cy="515" r="10" /><circle cx="530" cy="406" r="7" /><circle cx="842" cy="408" r="6" /><circle cx="394" cy="487" r="8" /><circle cx="660" cy="701" r="9" /><circle cx="703" cy="631" r="10" /><circle cx="386" cy="623" r="6" /></g>
+  <g fill="hsl(174 82% 58%)" opacity="0.9"><circle cx="1053" cy="147" r="12" /><circle cx="1272" cy="650" r="10" /><circle cx="1243" cy="376" r="10" /><circle cx="675" cy="503" r="6" /><circle cx="1458" cy="509" r="11" /><circle cx="568" cy="595" r="7" /><circle cx="1028" cy="224" r="7" /><circle cx="1459" cy="670" r="10" /></g>
   <rect x="76" y="74" width="1448" height="752" rx="28" fill="none" stroke="#31445f" stroke-width="2" />
 </svg>
