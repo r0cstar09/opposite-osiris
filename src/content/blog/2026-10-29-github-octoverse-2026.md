@@ -3,8 +3,8 @@ title: "GitHub Octoverse 2026"
 description: "Agentic engineering drives exponential code output, fundamentally shifting development scale."
 publishDate: "2026-10-29"
 tags: ["cyber", "threat-intelligence", "defense"]
-img: "/assets/blog/hermes-relay/2026-10-29-github-octoverse-2026.svg"
-img_alt: "Editorial cyber defense illustration for GitHub Octoverse 2026"
+img: "/assets/blog/hermes-relay/2026-10-29-github-octoverse-2026-89cd4da1ed6b.png"
+img_alt: "Editorial illustration for GitHub Octoverse 2026"
 ---
 GitHub's 2026 Octoverse report is out, and the numbers show a fundamental shift in development scale, driven by what they're calling "agentic engineering." According to GitHub, merged pull requests have tripled in less than a year to 220 million per month. Monthly commits are up more than 3x to 7.38 billion.
 

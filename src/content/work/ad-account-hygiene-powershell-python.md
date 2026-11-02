@@ -3,8 +3,8 @@ title: "Cleaning Up Inactive AD Accounts with PowerShell and Python"
 description: "PowerShell gets the accounts out of AD. Python cleans up the spreadsheet and separates them so you can work out which ones need attention first."
 publishDate: "2026-11-02"
 tags: ["Active Directory", "PowerShell", "Python", "Identity Security", "Security Automation"]
-img: "/images/ad-account-hygiene/02-dashboard.png"
-img_alt: "AD account review dashboard with sample account groups and priorities"
+img: "/images/ad-account-hygiene/ad-account-hygiene-powershell-python-b68e94707a8a.png"
+img_alt: "Editorial illustration for Cleaning Up Inactive AD Accounts with PowerShell and Python"
 ---
 
 This project is basically two scripts that work together. The first uses PowerShell to query Active Directory and export the results to Excel. The second uses Python to clean up that spreadsheet and split the accounts into groups, so you can decide which ones to deal with first.
@@ -65,6 +65,8 @@ It cleans up the values and puts the accounts into separate sheets:
 The rules use account names and where the accounts sit in AD. You can change those rules to suit your setup. For example, a service account can still be picked up even if someone created it in the same OU as employee accounts.
 
 Your own OU paths and naming rules go in `private_rules.json`. `sample_config.json` on GitHub contains generic examples; your internal details stay out of the repository.
+
+![The dashboard showing the account groups and priorities.](/images/ad-account-hygiene/02-dashboard.png)
 
 *The dashboard gives you a quick summary. The individual sheets give you the accounts to go through.*
 

@@ -3,8 +3,8 @@ title: "Malicious Claude Code extension on Cursor planted SSH backdoors"
 description: "5,000 developers exposed to SSH backdoors via a compromised AI dev tool."
 publishDate: "2026-10-30"
 tags: ["cyber", "threat-intelligence", "defense"]
-img: "/assets/blog/hermes-relay/2026-10-30-malicious-claude-code-extension-on-cursor-planted-ssh-backdoors.svg"
-img_alt: "Editorial cyber defense illustration for Malicious Claude Code extension on Cursor planted SSH backdoors"
+img: "/assets/blog/hermes-relay/2026-10-30-malicious-claude-code-extension-on-cursor-planted-ssh-backdoors-32cee8c28f7d.png"
+img_alt: "Editorial illustration for Malicious Claude Code extension on Cursor planted SSH backdoors"
 ---
 A malicious extension for an AI code editor recently aimed to install SSH backdoors on developer machines, but the attack was largely tripped up by its own coding errors. The incident is less a story about a sophisticated threat and more a look at the clumsy realities of supply chain attacks.
 

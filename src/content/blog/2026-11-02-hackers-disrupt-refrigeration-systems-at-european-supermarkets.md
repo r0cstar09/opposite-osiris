@@ -3,8 +3,8 @@ title: "Hackers disrupt refrigeration systems at European supermarkets"
 description: "Cyberattacks now directly threaten physical operations and revenue; evaluate our OT exposure."
 publishDate: "2026-11-02"
 tags: ["cyber", "threat-intelligence", "defense"]
-img: "/assets/blog/hermes-relay/2026-11-02-hackers-disrupt-refrigeration-systems-at-european-supermarkets.svg"
-img_alt: "Editorial cyber defense illustration for Hackers disrupt refrigeration systems at European supermarkets"
+img: "/assets/blog/hermes-relay/2026-11-02-hackers-disrupt-refrigeration-systems-at-european-supermarkets-4df83b57090a.png"
+img_alt: "Editorial illustration for Hackers disrupt refrigeration systems at European supermarkets"
 ---
 An attack on supermarket refrigeration systems isn't a hypothetical tabletop exercise anymore. According to a November 2026 report from BleepingComputer, hackers remotely targeted freezers and coolers across more than 115 stores in at least six European countries, forcing systems into defrost mode or, in one case, cranking the heat to +50°C (122°F).
 

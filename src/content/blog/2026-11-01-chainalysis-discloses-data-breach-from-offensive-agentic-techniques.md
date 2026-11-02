@@ -3,8 +3,8 @@ title: "Chainalysis discloses data breach from \"offensive agentic techniques\""
 description: "AI-driven attacks are now active threats, requiring immediate defense strategy review."
 publishDate: "2026-11-01"
 tags: ["cyber", "threat-intelligence", "defense"]
-img: "/assets/blog/hermes-relay/2026-11-01-chainalysis-discloses-data-breach-from-offensive-agentic-techniques.svg"
-img_alt: "Editorial cyber defense illustration for Chainalysis discloses data breach from \"offensive agentic techniques\""
+img: "/assets/blog/hermes-relay/2026-11-01-chainalysis-discloses-data-breach-from-offensive-agentic-techniques-33b879b59fa2.png"
+img_alt: "Editorial illustration for Chainalysis discloses data breach from \"offensive agentic techniques\""
 ---
 Chainalysis is blaming a recent data breach on "offensive agentic techniques." That's a new one. The term sounds more like a marketing slide than a technical post-mortem, but it's the official explanation for how an attacker accessed some of the company's customer data.
 

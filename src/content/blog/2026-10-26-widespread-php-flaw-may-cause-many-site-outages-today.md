@@ -3,8 +3,8 @@ title: "PHP2Shell: AI-assisted discovery is only half the security story"
 description: "The PHP response shows a practical opportunity for AI security: connect discovery to tested patches and verified deployment, not just more findings."
 publishDate: "2026-10-26"
 tags: ["cyber", "ai-security", "threat-intelligence", "defense"]
-img: "/assets/blog/hermes-relay/2026-10-26-widespread-php-flaw-may-cause-many-site-outages-today.svg"
-img_alt: "Editorial illustration of AI-assisted vulnerability discovery and coordinated defense"
+img: "/assets/blog/hermes-relay/2026-10-26-widespread-php-flaw-may-cause-many-site-outages-today-5ce146232e87.png"
+img_alt: "Editorial illustration for PHP2Shell: AI-assisted discovery is only half the security story"
 ---
 Finding a serious vulnerability with an AI model is impressive. Turning that finding into protection across a widely used software ecosystem is a different engineering problem. The PHP2Shell response is useful because it puts both parts of that process in view.
 
