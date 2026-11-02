@@ -1,0 +1,15 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/blog/ad-account-hygiene-powershell-python",
+      "destination": "/work/ad-account-hygiene-powershell-python/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/ad-account-hygiene-powershell-python/",
+      "destination": "/work/ad-account-hygiene-powershell-python/",
+      "permanent": true
+    }
+  ]
+}
